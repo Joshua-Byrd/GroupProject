@@ -22,7 +22,7 @@ public class Main {
      * @param args an array of String command line arguments
      * @return an array of File objects.
      */
-    public Database validateArguments(String[] args) throws FileNotFoundException, AccessDeniedException {
+    public ArrayList<File> validateArguments(String[] args) throws FileNotFoundException, AccessDeniedException {
 
 
         /******* Check that arguments are all well-formed *******/
@@ -127,6 +127,8 @@ public class Main {
             }
 
         }
+
+        return fileArrayList;
 
     }
 
