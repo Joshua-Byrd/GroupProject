@@ -6,9 +6,6 @@ import edu.upenn.cit594.datamanagement.PropertyDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
-
-public class processor {
-
 public class Processor {
 
     private COVIDDatabase covidDatabase;
@@ -41,19 +38,17 @@ public class Processor {
 
     public List<String> getAvailableDataSet() { return new ArrayList<>();}; //return a list of available datasets
 
-    public int getTotalPopulation(){ return 0;}};
+    public int getTotalPopulation(){ return 0;};
 
-    public int getTotalVaccinations() { return 0;};
+    public double getPartialVaccinationsPerCapita() { return 0;}
+
+    public double getFullVaccinationsPerCapita() { return 0; }
 
     public double getAvgMarketValue() { return 0.0;};
 
-    public double getAvgLivableValue() {
-        return 0;
-    }
+    public double getAvgLivableValue() { return 0; }
 
-    public double getTotalMarketValue() {
-        return 0;
-    }
+    public double getTotalMarketValue() { return 0; }
 
-//custom feature
+    //custom feature
 }
