@@ -1,16 +1,21 @@
 package edu.upenn.cit594;
 
+import edu.upenn.cit594.processor.Processor;
+import edu.upenn.cit594.ui.UserInterface;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.nio.file.AccessDeniedException;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Main {
 
     public static void main(String[] args) {
-
+        UserInterface ui = new UserInterface(new Processor());
+        ui.runUI(new Scanner(System.in));
 
 
 

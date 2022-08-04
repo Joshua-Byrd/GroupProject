@@ -5,7 +5,10 @@ import edu.upenn.cit594.datamanagement.PopulationDatabase;
 import edu.upenn.cit594.datamanagement.PropertyDatabase;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 public class Processor {
 
     private COVIDDatabase covidDatabase;
@@ -40,11 +43,23 @@ public class Processor {
 
     public int getTotalPopulation(){ return 0;};
 
-    public double getPartialVaccinationsPerCapita() { return 0;}
+    /**
+     * Accepts a date in String form, and returns a hashmap where the keys are each of the ZIP codes in the
+     * Philadelphia area and the values are the partial vaccinations per capita for that ZIP code
+     * @param date to search for vaccination statuses
+     * @return Hashmap of ZIP codes/Vaccination status per capita
+     */
+    public Map<Integer, Double> getPartialVaccinationsPerCapita(String date) { return new HashMap<Integer, Double>();}
 
-    public double getFullVaccinationsPerCapita() { return 0; }
+    /**
+     * Accepts a date in String form and returns a hashmap where the keys are each of the ZIP codes in the
+     * Philadelphia area and the values are the full vaccinations per capita for that ZIP code
+     * @param date to search vaccination statuses
+     * @return HashMap of ZIP codes/vaccination
+     */
+    public Map<Integer, Double> getFullVaccinationsPerCapita(String date) { return new HashMap<Integer, Double>(); }
 
-    public double getAvgMarketValue() { return 0.0;};
+    public int getAvgMarketValue() { return 0;};
 
     public double getAvgLivableValue() { return 0; }
 
