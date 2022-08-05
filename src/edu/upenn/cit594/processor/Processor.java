@@ -59,11 +59,13 @@ public class Processor {
      */
     public Map<Integer, Double> getFullVaccinationsPerCapita(String date) { return new HashMap<Integer, Double>(); }
 
-    public int getAvgMarketValue() { return 0;};
+    public int getAvgMarketValue(String zipcode) { return 0;};
 
-    public double getAvgLivableValue() { return 0; }
+    public int getAvgLivableValue(String zipcode) { return 0; }
 
-    public double getTotalMarketValue() { return 0; }
+    public int getTotalMarketValue(String zipcode) { return 0; }
+
+    public int getCustomFeature(){ return 0; }
 
     //custom feature
 }
