@@ -16,7 +16,11 @@ import java.util.regex.Pattern;
 public class Main {
 
     public static void main(String[] args) throws IOException {
+
         /* These are just for testing the ui at the moment*/
+        for (String s: args){
+            System.out.println(s);
+        }
         Logger l = Logger.getInstance();
         UserInterface ui = new UserInterface(new Processor());
         ui.runUI(new Scanner(System.in));
@@ -109,27 +113,27 @@ public class Main {
         if (propFile != null) {
             propDataFile = new File(propFile);
             if  (!propDataFile.exists()) {
-                throw new FileNotFoundException("Covid file not found.");
+                throw new FileNotFoundException("Property file not found.");
             } else if (!propDataFile.canRead()) {
-                throw new AccessDeniedException("Covid file cannot be read.");
+                throw new AccessDeniedException("Property file cannot be read.");
             }
         }
 
         if (popFile != null) {
             popDataFile = new File(popFile);
             if  (!popDataFile.exists()) {
-                throw new FileNotFoundException("Covid file not found.");
+                throw new FileNotFoundException("Population file not found.");
             } else if (!popDataFile.canRead()) {
-                throw new AccessDeniedException("Covid file cannot be read.");
+                throw new AccessDeniedException("Population file cannot be read.");
             }
         }
 
         if (logFileArg != null) {
             logFile = new File(logFileArg);
             if  (!logFile.exists()) {
-                throw new FileNotFoundException("Covid file not found.");
+                throw new FileNotFoundException("Log file not found.");
             } else if (!logFile.canRead()) {
-                throw new AccessDeniedException("Covid file cannot be read.");
+                throw new AccessDeniedException("Log file cannot be read.");
             }
 
         }

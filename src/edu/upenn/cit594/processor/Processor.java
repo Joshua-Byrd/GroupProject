@@ -27,7 +27,9 @@ public class Processor {
     Map<String, Integer> totMktValuePerCapitaResults = new HashMap<>();
     Map<String, Integer> customFeatureResults = new HashMap<>();
 
-    public void processor(){
+    public void processor(
+
+    ){
         //how do we set the databases
     }
 
