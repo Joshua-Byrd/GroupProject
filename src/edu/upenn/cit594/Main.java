@@ -16,12 +16,10 @@ import java.util.regex.Pattern;
 public class Main {
 
     public static void main(String[] args) throws IOException {
+        /* These are just for testing the ui at the moment*/
         Logger l = Logger.getInstance();
         UserInterface ui = new UserInterface(new Processor());
         ui.runUI(new Scanner(System.in));
-
-
-
     }
 
     /**
