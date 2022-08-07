@@ -42,18 +42,13 @@ public class Processor {
      */
     public List<String> getAvailableDataSet() { return new ArrayList<>();}; //return a list of available datasets
 
-    /**
-     * Wrapper method for the calculateTotalPopulation method
-     * @return
-     */
-    public int getTotalPopulation(){ return calculateTotalPopulation(); };
 
     /**
      * Memoization method. Calculates the total population only if totalPopulation
      * has not been set. Otherwise, returns totalPopulation.
      * @return totalPopulation
      */
-    public int calculateTotalPopulation() {
+    public int getTotalPopulation() {
         if (totalPopulation == 0) {
             //perform calculations with dataset
             //and set totalPopulation
@@ -67,9 +62,7 @@ public class Processor {
      * @param date to search for vaccination statuses
      * @return Hashmap of ZIP codes/Vaccination status per capita
      */
-    public Map<Integer, Double> getPartialVaccinationsPerCapita(String date) { return new HashMap<Integer, Double>();}
-
-    public Map<Integer, Double> calcPartialVaccinatoinsPerCapita(String date) {
+    public Map<Integer, Double> getPartialVaccinationPerCapita(String date) {
         if (partialVaccinationResults.size() == 0) {
             //perform calculations with dataset
             //and set partialVaccinationResults

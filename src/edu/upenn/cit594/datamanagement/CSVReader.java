@@ -1,13 +1,11 @@
 package edu.upenn.cit594.datamanagement;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
-public class CSVReader implements Reader {
-
-	@Override
-	public List returnRecordsList() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+public interface CSVReader<E> {
+	
+	List<E> returnRecordsList() throws FileNotFoundException, NumberFormatException, IOException;
 
 }
