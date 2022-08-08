@@ -40,29 +40,18 @@ public class PropertyReader implements Reader {
         }
         
         int zipCode;
-        int marketValue; //string because page 5 says the market value and livable area can be non-numeric, and if have to ignore them during calculation but still read them
-        int livableArea;
+        String marketValue; //string because page 5 says the market value and livable area can be non-numeric, and if have to ignore them during calculation but still read them
+        String livableArea;
 		
         while((buffer = br.readLine()) != null) { 
         	
 			String[] propertyRecordArray = buffer.split(",", -1);
 						
 			if (isZipCodeValid(propertyRecordArray[zipCodeIndex])) {
-				
-				try {
-					marketValue = Integer.parseInt(propertyRecordArray[marketValueIndex]); //include malformed data
-				} catch (Exception e) {
-					marketValue = 0; //come back to this later
-				}
-			
-				try {
-					livableArea = Integer.parseInt(propertyRecordArray[livableAreaIndex]);
-					
 
-				} catch (Exception e){
-					livableArea = 0; //come back to this later
-				}
-				
+				marketValue = propertyRecordArray[marketValueIndex]; //include malformed data
+			
+				livableArea = propertyRecordArray[livableAreaIndex];
 				
 				zipCode = Integer.parseInt(propertyRecordArray[zipCodeIndex].substring(0, 5));
 			

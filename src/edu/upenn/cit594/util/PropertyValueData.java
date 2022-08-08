@@ -7,22 +7,22 @@ public class PropertyValueData {
 	//total_livable_area
 	//zip_code
 	
-	private int marketValue;
-	private int totalLivableArea;
+	private String marketValue;
+	private String totalLivableArea;
 	private int zipCode;
 	
-	public PropertyValueData(int marketValue, int totalLivableArea, int zipCode) {
+	public PropertyValueData(String marketValue, String livableArea, int zipCode) {
 		this.marketValue = marketValue;
-		this.totalLivableArea = totalLivableArea;
+		this.totalLivableArea = livableArea;
 		this.zipCode = zipCode;
 	}
 
 
-	public int getMarketValue() {
+	public String getMarketValue() {
 		return marketValue;
 	}
 
-	public int getTotalLivableArea() {
+	public String getTotalLivableArea() {
 		return totalLivableArea;
 	}
 
