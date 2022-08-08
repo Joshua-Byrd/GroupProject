@@ -40,8 +40,8 @@ public class PropertyReader implements Reader {
         }
         
         int zipCode;
-        String marketValue; //string because page 5 says the market value and livable area can be non-numeric, and if have to ignore them during calculation but still read them
-        String livableArea;
+        int marketValue; //string because page 5 says the market value and livable area can be non-numeric, and if have to ignore them during calculation but still read them
+        int livableArea;
 		
         while((buffer = br.readLine()) != null) { 
         	
@@ -50,22 +50,24 @@ public class PropertyReader implements Reader {
 			if (isZipCodeValid(propertyRecordArray[zipCodeIndex])) {
 				
 				try {
-					marketValue = propertyRecordArray[marketValueIndex]; //include malformed data
+					marketValue = Integer.parseInt(propertyRecordArray[marketValueIndex]); //include malformed data
 				} catch (Exception e) {
-					marketValue = "0"; //come back to this later
+					marketValue = 0; //come back to this later
 				}
 			
 				try {
-					livableArea = propertyRecordArray[livableAreaIndex];
+					livableArea = Integer.parseInt(propertyRecordArray[livableAreaIndex]);
 					
 
 				} catch (Exception e){
-					livableArea = "0"; //come back to this later
+					livableArea = 0; //come back to this later
 				}
 				
-				zipCode = Integer.parseInt(propertyRecordArray[zipCodeIndex]);
+				
+				zipCode = Integer.parseInt(propertyRecordArray[zipCodeIndex].substring(0, 5));
 			
 				PropertyValueData pvd = new PropertyValueData(marketValue, livableArea, zipCode);
+				
 				propertyObjectList.add(pvd);
 			
 			}
@@ -86,7 +88,7 @@ public class PropertyReader implements Reader {
 		
 		Pattern p = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
 		
-		Matcher m = p.matcher(zipCode.subSequence(0, 5));
+		Matcher m = p.matcher(zipCode.substring(0, 5));
 			
 		 if(m.find()) {	//System.out.println("eliminated regex" + zipCode); //debugging
 
