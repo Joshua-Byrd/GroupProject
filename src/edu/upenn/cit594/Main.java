@@ -40,7 +40,7 @@ public class Main {
         Processor processor = setUpProcessor(validateArguments(args));
         Logger l = Logger.getInstance();
         UserInterface ui = new UserInterface(processor);
-        ui.runUI(new Scanner(System.in));
+        ui.start();
     }
 
     /**

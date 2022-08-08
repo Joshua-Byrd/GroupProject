@@ -73,7 +73,7 @@ public class PopulationReader implements Reader {
 			
 		
         	}
-		return null;
+		return populationObjectList;
 	}
 
 	private boolean isValidPopulationFigure(String populationAsString) {

@@ -33,6 +33,8 @@ public class UserInterface {
         //and set database variables
         processor.setUpDatabases();
 
+
+
         //run the user interface
         runUI(scanner);
 
@@ -185,11 +187,11 @@ public class UserInterface {
         System.out.println("Please enter a zipcode.");
         System.out.print(" >");
         System.out.flush();
-        String userInput = scanner.nextLine();
+        int userInput = scanner.nextInt();
 
         while(!isValidZipCode(userInput)){
             System.out.println("That is not a valid zip code. Please enter a valid zip code.");
-            userInput = scanner.nextLine();
+            userInput = scanner.nextInt();
         }
 
         //log user's input
@@ -210,11 +212,11 @@ public class UserInterface {
         System.out.println("Please enter a zipcode.");
         System.out.print(" >");
         System.out.flush();
-        String userInput = scanner.nextLine();
+        int userInput = scanner.nextInt();
 
         while(!isValidZipCode(userInput)){
             System.out.println("That is not a valid zip code. Please enter a valid zip code.");
-            userInput = scanner.nextLine();
+            userInput = scanner.nextInt();
         }
 
         //log user's input
@@ -235,11 +237,11 @@ public class UserInterface {
         System.out.println("Please enter a zipcode.");
         System.out.print(" >");
         System.out.flush();
-        String userInput = scanner.nextLine();
+        int userInput = scanner.nextInt();
 
         while(!isValidZipCode(userInput)){
             System.out.println("That is not a valid zip code. Please enter a valid zip code.");
-            userInput = scanner.nextLine();
+            userInput = scanner.nextInt();
         }
 
         //log user's input
@@ -266,6 +268,6 @@ public class UserInterface {
      * @param zip code to be checked
      * @return true or false
      */
-    public boolean isValidZipCode(String zip){ return true;}
+    public boolean isValidZipCode(int zip){ return true;}
 
 }

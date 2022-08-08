@@ -72,7 +72,7 @@ public class PropertyReader implements Reader {
 		
         }
 		
-		return null; //if file is empty
+		return propertyObjectList; //if file is empty
 	}
 
 	private boolean isZipCodeValid(String zipCode) {

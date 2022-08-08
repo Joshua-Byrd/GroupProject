@@ -28,10 +28,10 @@ public class Processor {
     private int totalPopulation = 0;
     Map<Integer, Double> partialVaccinationResults = new TreeMap<>();
     Map<Integer, Double> fullVaccinationResults = new TreeMap<>();
-    Map<String, Integer> avgMktValueResults = new HashMap<>();
-    Map<String, Integer> avgTotLivAreaResults = new HashMap<>();
-    Map<String, Integer> totMktValuePerCapitaResults = new HashMap<>();
-    Map<String, Integer> customFeatureResults = new HashMap<>();
+    Map<Integer, Integer> avgMktValueResults = new HashMap<>();
+    Map<Integer, Integer> avgTotLivAreaResults = new HashMap<>();
+    Map<Integer, Integer> totMktValuePerCapitaResults = new HashMap<>();
+    Map<Integer, Integer> customFeatureResults = new HashMap<>();
 
     public Processor(Reader...arr) {
 
@@ -95,31 +95,58 @@ public class Processor {
         return fullVaccinationResults;
     }
 
-    public int getAvgMarketValue(String zipcode) {
-        if (avgMktValueResults.containsKey(zipcode)) {
-            return (avgMktValueResults.get(zipcode));
-        } else {
-            //calculate average market value and add
-            //to avgMktValueResults map
-            //return result
-            return 0;
+
+    public int calculateAverages(String field, int zipCode) {
+        int sum = 0;
+        int count = 0;
+
+
+        //calculate for average market value
+        if ("avgMktValue".equals(field)) {
+            //calculate results only if not present in the results map
+            if(!avgMktValueResults.containsKey(zipCode)) {
+
+                //sum all market values and count up all properties in that zip code
+                for (PropertyValueData record : propertyDatabase) {
+                    if (record.getZipCode() == zipCode) {
+                        count++;
+                        sum += record.getMarketValue();
+                    }
+                }
+                //add result to results map
+                avgMktValueResults.put(zipCode, sum / count);
+                return sum / count;
+            } else { return avgMktValueResults.get(zipCode);}
+        } else { // calculate for total liveable area
+
+            //calculate results only if not present in the results map
+            if(!avgTotLivAreaResults.containsKey(zipCode)) {
+
+                //sum all total liveable values and count up all properties in that zip code
+                for (PropertyValueData record : propertyDatabase) {
+                    if (record.getZipCode() == zipCode) {
+                        count++;
+                        sum += record.getTotalLivableArea();
+                    }
+                }
+                //add result to results map
+                avgMktValueResults.put(zipCode, sum / count);
+                return sum/count;
+            } else { return avgTotLivAreaResults.get(zipCode);}
         }
     }
 
-    ;
 
-    public int getAvgTotLivableArea(String zipcode) {
-        if (avgTotLivAreaResults.containsKey(zipcode)) {
-            return avgTotLivAreaResults.get(zipcode);
-        } else {
-            //calculate average total liveable area and
-            //add result to avgTotLivAreaResults
-            //return result
-            return 0;
-        }
+    public int getAvgMarketValue(int zipCode) {
+         return calculateAverages("avgMktValue", zipCode);
     }
 
-    public int getTotalMarketValue(String zipcode) {
+
+    public int getAvgTotLivableArea(int zipCode) {
+       return calculateAverages("totLiveableArea", zipCode);
+    }
+
+    public int getTotalMarketValue(int zipcode) {
         if (totMktValuePerCapitaResults.containsKey(zipcode)) {
             return totMktValuePerCapitaResults.get(zipcode);
         } else {
@@ -190,6 +217,10 @@ public class Processor {
         if (propertyReader != null) {
             propertyDatabase = (ArrayList<PropertyValueData>) propertyReader.returnRecordsList();
         }
+
+        System.out.println("covid records: " + covidDatabase.size());
+        System.out.println("population records: " + populationDatabase.size());
+        System.out.println("properties records: " + propertyDatabase.size());
     }
 
 }
