@@ -10,7 +10,7 @@ import java.util.List;
 
 import edu.upenn.cit594.util.PopulationData;
 
-public class PopulationReader implements CSVReader {
+public class PopulationReader implements Reader {
 	
 	private File fileName;
 

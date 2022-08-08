@@ -11,7 +11,7 @@ import java.util.List;
 
 import edu.upenn.cit594.util.CovidData;
 
-public class COVIDReader implements CSVReader {
+public class COVIDReader implements Reader{
 	
 	private File fileName;
 

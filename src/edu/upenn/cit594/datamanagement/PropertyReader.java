@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 
 import edu.upenn.cit594.util.PropertyValueData;
 
-public class PropertyReader implements CSVReader {
+public class PropertyReader implements Reader {
 	
 	private File fileName;
 

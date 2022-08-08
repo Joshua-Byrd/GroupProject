@@ -25,12 +25,13 @@ public class UserInterface {
      * While objects are instantiated and relationships established in main,
      * start() actually begins and runs the program.
      */
-    public void start(){
+    public void start() throws IOException {
 
         Scanner scanner = new Scanner(System.in);
 
         //Call methods in processor to read in the databases
         //and set database variables
+        processor.setUpDatabases();
 
         //run the user interface
         runUI(scanner);

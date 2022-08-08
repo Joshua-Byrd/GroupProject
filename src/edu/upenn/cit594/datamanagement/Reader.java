@@ -1,9 +1,12 @@
 package edu.upenn.cit594.datamanagement;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public interface Reader<E> {
-	
-	List<E> returnRecordsList();
+
+	List<E> returnRecordsList() throws FileNotFoundException, NumberFormatException, IOException;
 
 }

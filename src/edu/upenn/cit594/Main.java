@@ -1,5 +1,9 @@
 package edu.upenn.cit594;
 
+import edu.upenn.cit594.datamanagement.COVIDReader;
+import edu.upenn.cit594.datamanagement.PopulationReader;
+import edu.upenn.cit594.datamanagement.PropertyReader;
+import edu.upenn.cit594.datamanagement.Reader;
 import edu.upenn.cit594.logging.Logger;
 import edu.upenn.cit594.processor.Processor;
 import edu.upenn.cit594.ui.UserInterface;
@@ -9,6 +13,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.AccessDeniedException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -17,12 +23,23 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        /* These are just for testing the ui at the moment*/
-        for (String s: args){
-            System.out.println(s);
-        }
+        /*
+            What does main need to do?
+            1. validate files
+            2. instantiate readers based on command line args
+            3. pass readers to processor (processor has methods to retrieve data)
+            4. pass processor to UserInterface
+            5. instantiate logger
+            6. run ui.start()
+
+        */
+
+        //validate arguments and return Map<String, File>
+        //use the map in setUpProcessor to instantiate Readers and pass to processor
+        //return processor
+        Processor processor = setUpProcessor(validateArguments(args));
         Logger l = Logger.getInstance();
-        UserInterface ui = new UserInterface(new Processor());
+        UserInterface ui = new UserInterface(processor);
         ui.runUI(new Scanner(System.in));
     }
 
@@ -32,7 +49,7 @@ public class Main {
      * @param args an array of String command line arguments
      * @return an array of File objects.
      */
-    public ArrayList<File> validateArguments(String[] args) throws FileNotFoundException, AccessDeniedException {
+    public static Map<String, File> validateArguments(String[] args) throws FileNotFoundException, AccessDeniedException {
 
 
         /******* Check that arguments are all well-formed *******/
@@ -48,7 +65,7 @@ public class Main {
         File popDataFile;
         File logFile;
 
-        ArrayList<File> fileArrayList = new ArrayList<>();
+        Map<String, File> fileMap = new HashMap<>();
 
 
         Pattern argsPattern = Pattern.compile("^--(?<name>.+?)=(?<value>.+)$");
@@ -108,6 +125,7 @@ public class Main {
             } else if (!covidDataFile.canRead()) {
                 throw new AccessDeniedException("Covid file cannot be read.");
             }
+            fileMap.put("covidDataFile", covidDataFile);
         }
 
         if (propFile != null) {
@@ -117,6 +135,7 @@ public class Main {
             } else if (!propDataFile.canRead()) {
                 throw new AccessDeniedException("Property file cannot be read.");
             }
+            fileMap.put("propDataFile", propDataFile);
         }
 
         if (popFile != null) {
@@ -126,6 +145,7 @@ public class Main {
             } else if (!popDataFile.canRead()) {
                 throw new AccessDeniedException("Population file cannot be read.");
             }
+            fileMap.put("popDataFile", popDataFile);
         }
 
         if (logFileArg != null) {
@@ -138,9 +158,25 @@ public class Main {
 
         }
 
-        return fileArrayList;
-
+        return fileMap;
     }
+
+    public static Processor setUpProcessor(Map<String, File> fileMap){
+        Processor processor = new Processor();
+
+        for(Map.Entry<String, File> e: fileMap.entrySet()) {
+            if (e.getKey().equals("covidDataFile")) {
+                processor.setCovidReader(new COVIDReader(e.getValue()));
+            } else if (e.getKey().equals("popDataFile")) {
+                processor.setPopulationReader(new PopulationReader(e.getValue()));
+            } else if (e.getKey().equals("propDataFile")) {
+                processor.setPropertyReader(new PropertyReader(e.getValue()));
+            }
+        }
+
+        return processor;
+    }
+
 
 
 

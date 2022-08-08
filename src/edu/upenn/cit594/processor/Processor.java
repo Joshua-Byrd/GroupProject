@@ -1,36 +1,40 @@
 package edu.upenn.cit594.processor;
+import edu.upenn.cit594.datamanagement.COVIDReader;
+import edu.upenn.cit594.datamanagement.PopulationReader;
+import edu.upenn.cit594.datamanagement.PropertyReader;
+import edu.upenn.cit594.util.CovidData;
+import edu.upenn.cit594.util.PopulationData;
+import edu.upenn.cit594.util.PropertyValueData;
 
-import edu.upenn.cit594.datamanagement.COVIDDatabase;
-import edu.upenn.cit594.datamanagement.PopulationDatabase;
-import edu.upenn.cit594.datamanagement.PropertyDatabase;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.IOException;
+import java.io.Reader;
+import java.util.*;
 
 public class Processor {
 
-    /*-----Databases-----*/
+    COVIDReader covidReader;
+    PropertyReader propertyReader;
+    PopulationReader populationReader;
 
-    private COVIDDatabase covidDatabase;
-    private PropertyDatabase propertyDatabase;
-    private PopulationDatabase populationDatabase;
+
+    /*-----Data lists-----*/
+
+    private ArrayList<CovidData> covidDatabase;
+    private ArrayList<PropertyValueData> propertyDatabase;
+    private ArrayList<PopulationData> populationDatabase;
 
     /*-----Memoization variables-----*/
 
     private int totalPopulation = 0;
-    Map<Integer, Double> partialVaccinationResults = new HashMap<>();
-    Map<Integer, Double> fullVaccinationResults = new HashMap<>();
+    Map<Integer, Double> partialVaccinationResults = new TreeMap<>();
+    Map<Integer, Double> fullVaccinationResults = new TreeMap<>();
     Map<String, Integer> avgMktValueResults = new HashMap<>();
     Map<String, Integer> avgTotLivAreaResults = new HashMap<>();
     Map<String, Integer> totMktValuePerCapitaResults = new HashMap<>();
     Map<String, Integer> customFeatureResults = new HashMap<>();
 
-    public void processor(
+    public Processor(Reader...arr) {
 
-    ){
-        //how do we set the databases
     }
 
 
@@ -38,14 +42,17 @@ public class Processor {
 
     /**
      * Returns a list of the datasets that are currently in the program
+     *
      * @return
      */
-    public List<String> getAvailableDataSet() { return new ArrayList<>();}; //return a list of available datasets
-
+    public List<String> getAvailableDataSet() {
+        return new ArrayList<>();
+    }
 
     /**
      * Memoization method. Calculates the total population only if totalPopulation
      * has not been set. Otherwise, returns totalPopulation.
+     *
      * @return totalPopulation
      */
     public int getTotalPopulation() {
@@ -59,10 +66,11 @@ public class Processor {
     /**
      * Accepts a date in String form, and returns a hashmap where the keys are each of the ZIP codes in the
      * Philadelphia area and the values are the partial vaccinations per capita for that ZIP code
+     *
      * @param date to search for vaccination statuses
      * @return Hashmap of ZIP codes/Vaccination status per capita
      */
-    public Map<Integer, Double> getPartialVaccinationPerCapita(String date) {
+    public Map<Integer, Double> getPartialVaccinationsPerCapita(String date) {
         if (partialVaccinationResults.size() == 0) {
             //perform calculations with dataset
             //and set partialVaccinationResults
@@ -74,6 +82,7 @@ public class Processor {
     /**
      * Accepts a date in String form and returns a hashmap where the keys are each of the ZIP codes in the
      * Philadelphia area and the values are the full vaccinations per capita for that ZIP code
+     *
      * @param date to search vaccination statuses
      * @return HashMap of ZIP codes/vaccination
      */
@@ -95,7 +104,9 @@ public class Processor {
             //return result
             return 0;
         }
-    };
+    }
+
+    ;
 
     public int getAvgTotLivableArea(String zipcode) {
         if (avgTotLivAreaResults.containsKey(zipcode)) {
@@ -109,7 +120,7 @@ public class Processor {
     }
 
     public int getTotalMarketValue(String zipcode) {
-        if(totMktValuePerCapitaResults.containsKey(zipcode)) {
+        if (totMktValuePerCapitaResults.containsKey(zipcode)) {
             return totMktValuePerCapitaResults.get(zipcode);
         } else {
             //calculate total market value per capita
@@ -119,8 +130,8 @@ public class Processor {
         }
     }
 
-    public int getCustomFeature(String input){
-        if (customFeatureResults.containsKey(input)){
+    public int getCustomFeature(String input) {
+        if (customFeatureResults.containsKey(input)) {
             return customFeatureResults.get(input);
         } else {
             //calculate the custom feature and add
@@ -130,29 +141,56 @@ public class Processor {
         }
     }
 
+    public COVIDReader getCovidReader() {
+        return covidReader;
+    }
 
-    /*-----Getters and Setters-----*/
-    public COVIDDatabase getCovidDatabase() {
+    public void setCovidReader(COVIDReader covidReader) {
+        this.covidReader = covidReader;
+    }
+
+    public PropertyReader getPropertyReader() {
+        return propertyReader;
+    }
+
+    public void setPropertyReader(PropertyReader propertyReader) {
+        this.propertyReader = propertyReader;
+    }
+
+    public edu.upenn.cit594.datamanagement.PopulationReader getPopulationReader() {
+        return populationReader;
+    }
+
+    public void setPopulationReader(PopulationReader populationReader) {
+        this.populationReader = populationReader;
+    }
+
+    public ArrayList<CovidData> getCovidDatabase() {
         return covidDatabase;
     }
 
-    public PropertyDatabase getPropertyDatabase() {
+    public ArrayList<PropertyValueData> getPropertyDatabase() {
         return propertyDatabase;
     }
 
-    public PopulationDatabase getPopulationDatabase() {
+    public ArrayList<PopulationData> getPopulationDatabase() {
         return populationDatabase;
     }
 
-    public void setCovidDatabase(COVIDDatabase covidDatabase) {
-        this.covidDatabase = covidDatabase;
+    public void setUpDatabases() throws IOException {
+
+        if (covidReader != null) {
+            covidDatabase = (ArrayList<CovidData>) covidReader.returnRecordsList();
+        }
+
+        if (populationReader != null) {
+            populationDatabase = (ArrayList<PopulationData>) populationReader.returnRecordsList();
+        }
+
+        if (propertyReader != null) {
+            propertyDatabase = (ArrayList<PropertyValueData>) propertyReader.returnRecordsList();
+        }
     }
 
-    public void setPropertyDatabase(PropertyDatabase propertyDatabase) {
-        this.propertyDatabase = propertyDatabase;
-    }
-
-    public void setPopulationDatabase(PopulationDatabase populationDatabase) {
-        this.populationDatabase = populationDatabase;
-    }
 }
+
