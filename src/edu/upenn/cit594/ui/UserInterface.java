@@ -1,19 +1,19 @@
 package edu.upenn.cit594.ui;
-
-
 import edu.upenn.cit594.logging.Logger;
 import edu.upenn.cit594.processor.Processor;
+import edu.upenn.cit594.util.CovidData;
+import edu.upenn.cit594.util.PopulationData;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.regex.Matcher;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 public class UserInterface {
-
+    private Set<Integer> zipCodes = new HashSet<>();
     private Processor processor;
     private final Logger logger = Logger.getInstance();
 
@@ -33,7 +33,8 @@ public class UserInterface {
         //and set database variables
         processor.setUpDatabases();
 
-
+        //populate set of zipcodes for validation
+        getAllZipCodes();
 
         //run the user interface
         runUI(scanner);
@@ -91,7 +92,7 @@ public class UserInterface {
                     break;
                 default:
                     System.out.println("That is not a valid menu option. Please select from the menu above.");
-                    System.out.println("\n >");
+                    System.out.println(" >");
                     System.out.flush();
 
             }
@@ -133,11 +134,13 @@ public class UserInterface {
         System.out.println("Would you like the date for full or partial vaccination status?");
         System.out.println("please enter 'full' or 'partial'");
         System.out.print(" >");
+        System.out.flush();
 
         String vaccinationResponse = scanner.nextLine();
         while (!"full".equals(vaccinationResponse) && !"partial".equals(vaccinationResponse)){
             System.out.println("That is not a valid response. Please enter 'full' or 'partial'.");
             System.out.print(" >");
+            System.out.flush();
             vaccinationResponse = scanner.nextLine();
             System.out.flush();
         }
@@ -265,10 +268,24 @@ public class UserInterface {
     }
 
     /**
+     * Iterates through databases to retrieve all zip codes for validation in other methods.
+     */
+    public void getAllZipCodes(){
+        for (CovidData c: processor.getCovidDatabase()) {
+            zipCodes.add(c.getZipCode());
+        }
+
+        for (PopulationData p: processor.getPopulationDatabase()) {
+            zipCodes.add(p.getZipCode());
+        }
+    }
+
+
+    /**
      * Checks that the provided zip code is a valid Philadelpia area zip code. How do we do this?
      * @param zip code to be checked
      * @return true or false
      */
-    public boolean isValidZipCode(int zip){ return true;}
+    public boolean isValidZipCode(int zip){ return zipCodes.contains(zip);}
 
 }

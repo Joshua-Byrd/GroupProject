@@ -162,41 +162,11 @@ public class Processor {
     public int calculateAverages(String field, int zipCode) {
         int sum = 0;
         int count = 0;
+        int result = 0;
 
 
-        //calculate for average market value
-        if ("avgMktValue".equals(field)) {
-            //calculate results only if not present in the results map
-            if(!avgMktValueResults.containsKey(zipCode)) {
+        return result;
 
-                //sum all market values and count up all properties in that zip code
-                for (PropertyValueData record : propertyDatabase) {
-                    if (record.getZipCode() == zipCode) {
-                        count++;
-                        sum += record.getMarketValue();
-                    }
-                }
-                //add result to results map
-                avgMktValueResults.put(zipCode, sum / count);
-                return sum / count;
-            } else { return avgMktValueResults.get(zipCode);}
-        } else { // calculate for total liveable area
-
-            //calculate results only if not present in the results map
-            if(!avgTotLivAreaResults.containsKey(zipCode)) {
-
-                //sum all total liveable values and count up all properties in that zip code
-                for (PropertyValueData record : propertyDatabase) {
-                    if (record.getZipCode() == zipCode) {
-                        count++;
-                        sum += record.getTotalLivableArea();
-                    }
-                }
-                //add result to results map
-                avgMktValueResults.put(zipCode, sum / count);
-                return sum/count;
-            } else { return avgTotLivAreaResults.get(zipCode);}
-        }
     }
 
 
@@ -210,14 +180,39 @@ public class Processor {
     }
 
     public int getTotalMarketValue(int zipcode) {
-        if (totMktValuePerCapitaResults.containsKey(zipcode)) {
-            return totMktValuePerCapitaResults.get(zipcode);
-        } else {
-            //calculate total market value per capita
-            //and add to totMktValuePerCapitaResults
-            //return result
-            return 0;
+
+        if (!totMktValuePerCapitaResults.containsKey(zipcode)) {
+            double totMktVal = 0;
+            int population = 0;
+            int result;
+
+            //get population for the given zip code
+            for (PopulationData p: populationDatabase) {
+                if (p.getZipCode() == zipcode) {
+                    population = p.getPopulation();
+                    break;
+                }
+            }
+
+            //get sum of market values
+            for (PropertyValueData p: propertyDatabase) {
+                double mktVal;
+
+                //try to cast market value to an int and add to total
+                //continue if not possible
+                if (p.getZipCode() == zipcode) {
+                    try {
+                        mktVal = Double.parseDouble(p.getMarketValue());
+                        totMktVal += mktVal;
+                    } catch( Exception e) {System.out.println("Could not parse market value.");}
+                }
+            }
+
+            result = (int) (totMktVal / population);
+            totMktValuePerCapitaResults.put(zipcode, result);
         }
+
+        return totMktValuePerCapitaResults.get(zipcode);
     }
 
     public int getCustomFeature(String input) {
@@ -281,9 +276,6 @@ public class Processor {
             propertyDatabase = (ArrayList<PropertyValueData>) propertyReader.returnRecordsList();
         }
 
-//        System.out.println("covid records: " + covidDatabase.size());
-//        System.out.println("population records: " + populationDatabase.size());
-//        System.out.println("properties records: " + propertyDatabase.size());
     }
 
 }
