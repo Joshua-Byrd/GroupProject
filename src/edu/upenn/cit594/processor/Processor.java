@@ -156,27 +156,48 @@ public class Processor {
     }
 		return fullVaccinationResults;
    }
-  
 
 
-    public int calculateAverages(String field, int zipCode) {
-        int sum = 0;
+    /**
+     * General method that implements the strategy pattern for getAvgMktValue and
+     * getTotLivArea operations. Calls the appropriate FieldSum class get the
+     * required sum, then calculates the average of that field for the given zipcode
+     * @param zipCode to calulate the average for
+     * @param sum the FieldSum class to get the appropriate sum
+     * @return a truncated int that is the average of the given field in the given zip code
+     */
+    public int calculateAverage(int zipCode, FieldSum sum) {
+        double newSum = sum.getSum(zipCode, propertyDatabase);
         int count = 0;
-        int result = 0;
 
+        for (PropertyValueData p : propertyDatabase) {
+            if (p.getZipCode() == zipCode) {
+                count++;
+            }
+        }
 
-        return result;
+        return (int) (newSum/count);
 
     }
 
-
+    /**
+     * Calls the calculateAverage method to return the average market value of properties
+     * in the given zip code
+     * @param zipCode to search properties for
+     * @return the average market value of properties in the given zip code
+     */
     public int getAvgMarketValue(int zipCode) {
-         return calculateAverages("avgMktValue", zipCode);
+         return calculateAverage(zipCode, new MktValSum());
     }
 
-
+    /**
+     * Calls the calculateAverage method to return the average total livable area for
+     * properties in the given zip code.
+     * @param zipCode to search properties for
+     * @return the average total livable area for properties in the given zip code
+     */
     public int getAvgTotLivableArea(int zipCode) {
-       return calculateAverages("totLiveableArea", zipCode);
+       return calculateAverage(zipCode, new TotLivAreaSum());
     }
 
     public int getTotalMarketValue(int zipcode) {
@@ -198,8 +219,8 @@ public class Processor {
             for (PropertyValueData p: propertyDatabase) {
                 double mktVal;
 
-                //try to cast market value to an int and add to total
-                //continue if not possible
+                //try to cast market value to a double and add to total
+                //continue to next record if not possible
                 if (p.getZipCode() == zipcode) {
                     try {
                         mktVal = Double.parseDouble(p.getMarketValue());
