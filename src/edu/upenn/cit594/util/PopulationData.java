@@ -17,5 +17,6 @@ public class PopulationData {
 	public int getPopulation() {
 		return population;
 	}
+	
 
 }

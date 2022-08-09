@@ -31,7 +31,7 @@ public class COVIDReader implements Reader{
 		//read first line to understand state of the columns
 		
         String buffer = br.readLine();
-        String[] lineArray = buffer.split(",");        
+        String[] lineArray = buffer.split(",", -1);        
         int zipIndex = 0, partiallyVaccinatedIndex = 0, fullyVaccinatedIndex = 0, timeStampIndex = 0;
         
         for (int i=0; i<lineArray.length; i++) {
@@ -67,6 +67,7 @@ public class COVIDReader implements Reader{
 				
 					try {
 						partiallyVaccinated = Integer.parseInt(covidRecordArray[partiallyVaccinatedIndex]);
+						//System.out.println(partiallyVaccinated);
 					} catch (Exception e) {
 						partiallyVaccinated = 0;
 					}

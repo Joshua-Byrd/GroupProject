@@ -8,6 +8,7 @@ import edu.upenn.cit594.util.PropertyValueData;
 
 import java.io.IOException;
 import java.io.Reader;
+import java.text.DecimalFormat;
 import java.util.*;
 
 public class Processor {
@@ -15,6 +16,8 @@ public class Processor {
     COVIDReader covidReader;
     PropertyReader propertyReader;
     PopulationReader populationReader;
+    
+    private static final DecimalFormat df = new DecimalFormat("0.0000");
 
 
     /*-----Data lists-----*/
@@ -46,7 +49,30 @@ public class Processor {
      * @return
      */
     public List<String> getAvailableDataSet() {
-        return new ArrayList<>();
+    	
+    	List availableDataSet = new ArrayList<>();
+    	
+    	try { 
+    		if (covidDatabase.size()>=0) {availableDataSet.add("covid");}
+    	} catch (Exception e) {
+    		; // do nothing and not add to the list
+    	}
+    	   	
+    	try {
+    		if (propertyDatabase.size()>=0) {availableDataSet.add("property");}
+    	} catch (Exception e) {
+    		; // do nothing and not add to the list
+    	}
+    	
+    	try {
+    		if (populationDatabase.size()>=0) {availableDataSet.add("population");}
+    	} catch (Exception e) {
+    		; // do nothing and not add to the list
+    	}
+    	
+    	availableDataSet.sort(null); //sorting using natural string order
+    	
+    	return availableDataSet;
     }
 
     /**
@@ -57,8 +83,10 @@ public class Processor {
      */
     public int getTotalPopulation() {
         if (totalPopulation == 0) {
-            //perform calculations with dataset
-            //and set totalPopulation
+        	
+        	for (PopulationData p: populationDatabase) {
+        		totalPopulation = p.getPopulation() + totalPopulation;
+        	}        	
         }
         return totalPopulation;
     }
@@ -72,12 +100,29 @@ public class Processor {
      */
     public Map<Integer, Double> getPartialVaccinationsPerCapita(String date) {
         if (partialVaccinationResults.size() == 0) {
-            //perform calculations with dataset
-            //and set partialVaccinationResults
+        	
+        	for (CovidData pvax: covidDatabase) {
+        		if (pvax.getTimeStamp().contains(date)) {
+        			for (PopulationData p: populationDatabase) {
+        				if (p.getZipCode() == pvax.getZipCode() && p.getPopulation() != 0) {
+        					double perCapita;
+        					
+        					perCapita = (double) pvax.getPartiallyVaccinated()/p.getPopulation();	
+        					
+        	        		partialVaccinationResults.put(pvax.getZipCode(), Double.parseDouble(df.format(perCapita))); 
+        	        		//losing the last 2 digits if they are 0. 
+        	        		//Need to figure that out
+        				}
+        				
+        			}        			        			
+        		}
+        	
         }
 
         return partialVaccinationResults;
     }
+		return partialVaccinationResults;
+   }
 
     /**
      * Accepts a date in String form and returns a hashmap where the keys are each of the ZIP codes in the
@@ -88,12 +133,30 @@ public class Processor {
      */
     public Map<Integer, Double> getFullVaccinationsPerCapita(String date) {
         if (fullVaccinationResults.size() == 0) {
-            //perform calculations and
-            //set fullVaccinationResults
+
+        	for (CovidData pvax: covidDatabase) {
+        		if (pvax.getTimeStamp().contains(date)) {
+        			for (PopulationData p: populationDatabase) {
+        				if (p.getZipCode() == pvax.getZipCode()) {
+        					double perCapita;
+        					
+        					perCapita = (double) pvax.getFullyVaccinated()/p.getPopulation();	
+        					
+        					fullVaccinationResults.put(pvax.getZipCode(), Double.parseDouble(df.format(perCapita))); 
+        	        		//losing the last 2 digits if they are 0. 
+        	        		//Need to figure that out
+        				}
+        				
+        			}        			        			
+        		}
+        	
         }
 
         return fullVaccinationResults;
     }
+		return fullVaccinationResults;
+   }
+  
 
 
     public int calculateAverages(String field, int zipCode) {
@@ -218,9 +281,9 @@ public class Processor {
             propertyDatabase = (ArrayList<PropertyValueData>) propertyReader.returnRecordsList();
         }
 
-        System.out.println("covid records: " + covidDatabase.size());
-        System.out.println("population records: " + populationDatabase.size());
-        System.out.println("properties records: " + propertyDatabase.size());
+//        System.out.println("covid records: " + covidDatabase.size());
+//        System.out.println("population records: " + populationDatabase.size());
+//        System.out.println("properties records: " + propertyDatabase.size());
     }
 
 }

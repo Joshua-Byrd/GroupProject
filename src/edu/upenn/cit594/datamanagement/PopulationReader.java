@@ -28,7 +28,7 @@ public class PopulationReader implements Reader {
 		
 		//read first line to understand the state of the columns	
         String buffer = br.readLine();
-        String[] lineArray = buffer.split(",");        
+        String[] lineArray = buffer.split(",", -1);        
         int populationIndex = 0, zipCodeIndex = 0;
         
         for (int i=0; i<lineArray.length; i++) {
@@ -38,9 +38,7 @@ public class PopulationReader implements Reader {
             if(lineArray[i].equalsIgnoreCase("\"zip_code\"")) {zipCodeIndex = i;
             }
         }
-        
-        
-		
+ 		
         int zipCode;
         int population;
         

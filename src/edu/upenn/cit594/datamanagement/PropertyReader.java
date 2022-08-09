@@ -29,7 +29,7 @@ public class PropertyReader implements Reader {
 		
 		//read first line to understand the state of the columns	
         String buffer = br.readLine();
-        String[] lineArray = buffer.split(",");        
+        String[] lineArray = buffer.split(",", -1);        
         int marketValueIndex = 0, livableAreaIndex = 0, zipCodeIndex = 0;
         
         for (int i=0; i<lineArray.length; i++) {

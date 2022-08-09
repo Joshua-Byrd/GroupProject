@@ -59,6 +59,7 @@ public class UserInterface {
                     for (String set : processor.getAvailableDataSet()) {
                         System.out.println(set);
                     }
+                    if (processor.getAvailableDataSet().size()==0) {System.out.println("No Data Set Is Available");} //Josh I added this for the case no dataset is available
                     System.out.println("END OUTPUT");
                     printMainMenu();
                     break;
