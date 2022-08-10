@@ -8,15 +8,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.upenn.cit594.logging.Logger;
 import edu.upenn.cit594.util.PopulationData;
 
 public class PopulationReader implements Reader {
 	
 	private File fileName;
 
+	private Logger l = Logger.getInstance();
+
     private List<PopulationData> populationObjectList;
     
-    public PopulationReader(File fileName) {
+    public PopulationReader(File fileName) throws IOException {
         this.fileName = fileName;
         this.populationObjectList = new ArrayList<PopulationData>();
     }
@@ -25,6 +28,9 @@ public class PopulationReader implements Reader {
 	public List returnRecordsList() throws IOException {
 		
 		BufferedReader br = new BufferedReader(new FileReader(fileName));
+
+		//log the file after opening for reading
+		l.log(System.currentTimeMillis() + " " + fileName.getName());
 		
 		//read first line to understand the state of the columns	
         String buffer = br.readLine();

@@ -9,15 +9,18 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import edu.upenn.cit594.logging.Logger;
 import edu.upenn.cit594.util.PropertyValueData;
 
 public class PropertyReader implements Reader {
 	
 	private File fileName;
 
+	private Logger l = Logger.getInstance();
+
     private List<PropertyValueData> propertyObjectList;
     
-    public PropertyReader(File fileName) {
+    public PropertyReader(File fileName) throws IOException {
         this.fileName = fileName;
         this.propertyObjectList = new ArrayList<PropertyValueData>();
     }
@@ -26,6 +29,9 @@ public class PropertyReader implements Reader {
 	public List returnRecordsList() throws IOException {
 
 		BufferedReader br = new BufferedReader(new FileReader(fileName));
+
+		//log the file after opening for reading
+		l.log(System.currentTimeMillis() + " " + fileName.getName());
 		
 		//read first line to understand the state of the columns	
         String buffer = br.readLine();

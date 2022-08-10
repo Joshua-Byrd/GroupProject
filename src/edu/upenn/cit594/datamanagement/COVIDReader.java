@@ -9,17 +9,19 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.upenn.cit594.logging.Logger;
 import edu.upenn.cit594.util.CovidData;
 
 public class COVIDReader implements Reader{
 	
 	private File fileName;
 
+	private Logger l = Logger.getInstance();
     private List<CovidData> objectList;
     
     private final String timeStampPattern = "YYYY-MM-DD hh:mm:ss";
 
-    public COVIDReader(File fileName) {
+    public COVIDReader(File fileName) throws IOException {
         this.fileName = fileName;
         this.objectList = new ArrayList<CovidData>();
     }
@@ -27,7 +29,11 @@ public class COVIDReader implements Reader{
 	public List returnRecordsList() throws NumberFormatException, IOException {
 		
 		BufferedReader br = new BufferedReader(new FileReader(fileName));
-		
+
+		//log the file after opening for reading
+		l.log(System.currentTimeMillis() + " " + fileName.getName());
+
+
 		//read first line to understand state of the columns
 		
         String buffer = br.readLine();
