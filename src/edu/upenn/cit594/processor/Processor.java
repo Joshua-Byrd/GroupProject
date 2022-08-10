@@ -164,20 +164,24 @@ public class Processor {
      * required sum, then calculates the average of that field for the given zipcode
      * @param zipCode to calulate the average for
      * @param sum the FieldSum class to get the appropriate sum
+     * @param memo map to store memoization results
      * @return a truncated int that is the average of the given field in the given zip code
      */
-    public int calculateAverage(int zipCode, FieldSum sum) {
+    public int calculateAverage(int zipCode, FieldSum sum, Map<Integer, Integer> memo) {
 
-        double newSum = sum.getSum(zipCode, propertyDatabase);
-        int count = 0;
+        if (!memo.containsKey(zipCode)) {
+            double newSum = sum.getSum(zipCode, propertyDatabase);
+            int count = 0;
 
-        for (PropertyValueData p : propertyDatabase) {
-            if (p.getZipCode() == zipCode) {
-                count++;
+            for (PropertyValueData p : propertyDatabase) {
+                if (p.getZipCode() == zipCode) {
+                    count++;
+                }
             }
+            memo.put(zipCode,(int) (newSum/count));
         }
 
-        return (int) (newSum/count);
+        return memo.get(zipCode);
 
     }
 
@@ -188,7 +192,8 @@ public class Processor {
      * @return the average market value of properties in the given zip code
      */
     public int getAvgMarketValue(int zipCode) {
-         return calculateAverage(zipCode, new MktValSum());
+         return calculateAverage(
+                 zipCode, new MktValSum(), avgMktValueResults);
     }
 
     /**
@@ -198,7 +203,7 @@ public class Processor {
      * @return the average total livable area for properties in the given zip code
      */
     public int getAvgTotLivableArea(int zipCode) {
-       return calculateAverage(zipCode, new TotLivAreaSum());
+       return calculateAverage(zipCode, new TotLivAreaSum(), avgTotLivAreaResults);
     }
 
     public int getTotalMarketValue(int zipcode) {

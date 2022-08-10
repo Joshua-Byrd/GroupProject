@@ -7,7 +7,9 @@ import java.io.PrintWriter;
 
 public class Logger {
 
-    //set default log file. Can be changed with setLogFile method
+    //default log file. If a log file is passed in as a command line argument, logFile
+    //gets set with the setLogFile method called in validateArguments in Main.  If no log
+    //file is passed in, an error is logged to System.err
     private File logFile = new File("log.txt");
     private PrintWriter out;
 
@@ -45,6 +47,10 @@ public class Logger {
      * @throws IOException if the file cannot be opened
      */
     public void setLogFile(String newFile) throws IOException {
+        if (logFile.equals(System.err)) {
+            //do not close System.err, just set output to given file
+            out = new PrintWriter(new FileOutputStream(newFile, true), true);
+        }
         out.close();
         out = new PrintWriter(new FileOutputStream(newFile, true), true);
     }

@@ -31,8 +31,9 @@ public class Main {
      * @param args an array of String command line arguments
      * @return a map of file names/file objects.
      */
-    public static Map<String, File> validateArguments(String[] args) throws FileNotFoundException, AccessDeniedException {
+    public static Map<String, File> validateArguments(String[] args) throws IOException {
 
+        Logger l = Logger.getInstance();
 
         /******* Check that arguments are all well-formed *******/
 
@@ -133,11 +134,16 @@ public class Main {
         if (logFileArg != null) {
             logFile = new File(logFileArg);
             if  (!logFile.exists()) {
+                l.setLogFile(System.err.toString());
+                l.log("Log file new found.");
                 throw new FileNotFoundException("Log file not found.");
             } else if (!logFile.canRead()) {
                 throw new AccessDeniedException("Log file cannot be read.");
             }
-
+        } else {
+            l.setLogFile(System.err.toString());
+            l.log("No log file was passed to command line.");
+            throw new FileNotFoundException("Log file not found.");
         }
 
         return fileMap;
@@ -168,7 +174,7 @@ public class Main {
     }
 
     /**
-     * Creates a string containing all of the command line arguments and logs them to the
+     * Creates a string containing all command line arguments and logs them to the
      * current log file.
      * @param fileMap a map of filename to files
      * @param l logger
