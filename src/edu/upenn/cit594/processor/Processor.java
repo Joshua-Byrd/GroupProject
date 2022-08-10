@@ -167,6 +167,7 @@ public class Processor {
      * @return a truncated int that is the average of the given field in the given zip code
      */
     public int calculateAverage(int zipCode, FieldSum sum) {
+
         double newSum = sum.getSum(zipCode, propertyDatabase);
         int count = 0;
 

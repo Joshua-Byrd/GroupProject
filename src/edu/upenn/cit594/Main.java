@@ -20,11 +20,7 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
 
-        //validate arguments and return Map<String, File>
-        //use the map in setUpProcessor to instantiate Readers and pass to processor
-        //return processor
         Processor processor = setUpProcessor(validateArguments(args));
-        Logger l = Logger.getInstance();
         UserInterface ui = new UserInterface(processor);
         ui.start();
     }
@@ -153,8 +149,10 @@ public class Main {
      * @param fileMap of file names and objects
      * @return a new Processor with the given Readers
      */
-    public static Processor setUpProcessor(Map<String, File> fileMap){
+    public static Processor setUpProcessor(Map<String, File> fileMap) throws IOException {
+        Logger l = Logger.getInstance();
         Processor processor = new Processor();
+        logCommandLineArgs(fileMap, l);
 
         for(Map.Entry<String, File> e: fileMap.entrySet()) {
             if (e.getKey().equals("covidDataFile")) {
@@ -167,6 +165,22 @@ public class Main {
         }
 
         return processor;
+    }
+
+    /**
+     * Creates a string containing all of the command line arguments and logs them to the
+     * current log file.
+     * @param fileMap a map of filename to files
+     * @param l logger
+     */
+    public static void logCommandLineArgs(Map<String, File> fileMap, Logger l) {
+        StringBuilder argsString = new StringBuilder();
+        for (Map.Entry<String, File> entry: fileMap.entrySet()) {
+            File f = entry.getValue();
+            argsString.append(f.getName()).append(" ");
+        }
+
+        l.log(System.currentTimeMillis() + " " + argsString);
     }
 
 
