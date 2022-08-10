@@ -12,7 +12,7 @@ import java.util.List;
 import edu.upenn.cit594.logging.Logger;
 import edu.upenn.cit594.util.CovidData;
 
-public class COVIDReader implements Reader{
+public class COVIDReaderCSV implements Reader{
 	
 	private File fileName;
 
@@ -21,7 +21,7 @@ public class COVIDReader implements Reader{
     
     private final String timeStampPattern = "YYYY-MM-DD hh:mm:ss";
 
-    public COVIDReader(File fileName) throws IOException {
+    public COVIDReaderCSV(File fileName) throws IOException {
         this.fileName = fileName;
         this.objectList = new ArrayList<CovidData>();
     }

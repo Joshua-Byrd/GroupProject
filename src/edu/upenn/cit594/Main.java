@@ -1,6 +1,7 @@
 package edu.upenn.cit594;
 
-import edu.upenn.cit594.datamanagement.COVIDReader;
+import edu.upenn.cit594.datamanagement.COVIDReaderCSV;
+import edu.upenn.cit594.datamanagement.COVIDReaderJSON;
 import edu.upenn.cit594.datamanagement.PopulationReader;
 import edu.upenn.cit594.datamanagement.PropertyReader;
 import edu.upenn.cit594.logging.Logger;
@@ -162,7 +163,13 @@ public class Main {
 
         for(Map.Entry<String, File> e: fileMap.entrySet()) {
             if (e.getKey().equals("covidDataFile")) {
-                processor.setCovidReader(new COVIDReader(e.getValue()));
+                if (e.getValue().getName().split("\\.(?=[^\\.]+$)")[1].toLowerCase().equals("csv")) {
+                    processor.setCovidReader(new COVIDReaderCSV(e.getValue()));
+                } else if (e.getValue().getName().split("\\.(?=[^\\.]+$)")[1].toLowerCase().equals("json")) {
+                    processor.setCovidReader(new COVIDReaderJSON(e.getValue()));
+                } else {
+                    throw new IllegalArgumentException("Covid data file must be a valid .txt or .json file.");
+                }
             } else if (e.getKey().equals("popDataFile")) {
                 processor.setPopulationReader(new PopulationReader(e.getValue()));
             } else if (e.getKey().equals("propDataFile")) {

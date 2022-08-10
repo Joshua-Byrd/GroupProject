@@ -1,5 +1,5 @@
 package edu.upenn.cit594.processor;
-import edu.upenn.cit594.datamanagement.COVIDReader;
+import edu.upenn.cit594.datamanagement.COVIDReaderCSV;
 import edu.upenn.cit594.datamanagement.PopulationReader;
 import edu.upenn.cit594.datamanagement.PropertyReader;
 import edu.upenn.cit594.util.CovidData;
@@ -13,7 +13,7 @@ import java.util.*;
 
 public class Processor {
 
-    COVIDReader covidReader;
+    COVIDReaderCSV covidReader;
     PropertyReader propertyReader;
     PopulationReader populationReader;
     
@@ -36,9 +36,7 @@ public class Processor {
     Map<Integer, Integer> totMktValuePerCapitaResults = new HashMap<>();
     Map<Integer, Integer> customFeatureResults = new HashMap<>();
 
-    public Processor(Reader...arr) {
-
-    }
+    public Processor(Reader...arr) {}
 
 
     /*-----Data Calculation Methods-----*/
@@ -160,7 +158,7 @@ public class Processor {
 
     /**
      * General method that implements the strategy pattern for getAvgMktValue and
-     * getTotLivArea operations. Calls the appropriate FieldSum class get the
+     * getTotLivArea operations. Calls the appropriate FieldSum class to get the
      * required sum, then calculates the average of that field for the given zipcode
      * @param zipCode to calulate the average for
      * @param sum the FieldSum class to get the appropriate sum
@@ -206,6 +204,11 @@ public class Processor {
        return calculateAverage(zipCode, new TotLivAreaSum(), avgTotLivAreaResults);
     }
 
+    /**
+     *
+     * @param zipcode
+     * @return
+     */
     public int getTotalMarketValue(int zipcode) {
 
         if (!totMktValuePerCapitaResults.containsKey(zipcode)) {
@@ -253,11 +256,13 @@ public class Processor {
         }
     }
 
-    public COVIDReader getCovidReader() {
+    /*----- Getters and Setters -----*/
+
+    public COVIDReaderCSV getCovidReader() {
         return covidReader;
     }
 
-    public void setCovidReader(COVIDReader covidReader) {
+    public void setCovidReader(COVIDReaderCSV covidReader) {
         this.covidReader = covidReader;
     }
 
