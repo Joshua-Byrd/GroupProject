@@ -166,7 +166,7 @@ public class Main {
                 if (e.getValue().getName().split("\\.(?=[^\\.]+$)")[1].toLowerCase().equals("csv")) {
                     processor.setCovidReader(new COVIDReaderCSV(e.getValue()));
                 } else if (e.getValue().getName().split("\\.(?=[^\\.]+$)")[1].toLowerCase().equals("json")) {
-                    processor.setCovidReader(new COVIDReaderJSON(e.getValue()));
+                    processor.setCovidReaderJSON(new COVIDReaderJSON(e.getValue()));
                 } else {
                     throw new IllegalArgumentException("Covid data file must be a valid .txt or .json file.");
                 }

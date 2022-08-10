@@ -1,5 +1,6 @@
 package edu.upenn.cit594.processor;
 import edu.upenn.cit594.datamanagement.COVIDReaderCSV;
+import edu.upenn.cit594.datamanagement.COVIDReaderJSON;
 import edu.upenn.cit594.datamanagement.PopulationReader;
 import edu.upenn.cit594.datamanagement.PropertyReader;
 import edu.upenn.cit594.util.CovidData;
@@ -14,6 +15,9 @@ import java.util.*;
 public class Processor {
 
     COVIDReaderCSV covidReader;
+
+    COVIDReaderJSON covidReaderJSON;
+
     PropertyReader propertyReader;
     PopulationReader populationReader;
     
@@ -266,6 +270,14 @@ public class Processor {
         this.covidReader = covidReader;
     }
 
+    public COVIDReaderJSON getCovidReaderJSON() {
+        return covidReaderJSON;
+    }
+
+    public void setCovidReaderJSON(COVIDReaderJSON covidReaderJSON) {
+        this.covidReaderJSON = covidReaderJSON;
+    }
+
     public PropertyReader getPropertyReader() {
         return propertyReader;
     }
@@ -298,6 +310,10 @@ public class Processor {
 
         if (covidReader != null) {
             covidDatabase = (ArrayList<CovidData>) covidReader.returnRecordsList();
+        }
+
+        if (covidReaderJSON != null) {
+            covidDatabase = (ArrayList<CovidData>) covidReaderJSON.returnRecordsList();
         }
 
         if (populationReader != null) {
