@@ -10,12 +10,10 @@ public class Logger {
     //default log file. If a log file is passed in as a command line argument, logFile
     //gets set with the setLogFile method called in validateArguments in Main.  If no log
     //file is passed in, an error is logged to System.err
-    private File logFile = new File("log.txt");
+    private File logFile = null;
     private PrintWriter out;
 
-    private Logger() throws IOException {
-        out = new PrintWriter(new FileOutputStream(logFile, true));
-    }
+    private Logger() throws IOException {}
 
     private static Logger instance = null;
 
@@ -47,12 +45,15 @@ public class Logger {
      * @throws IOException if the file cannot be opened
      */
     public void setLogFile(String newFile) throws IOException {
-        if (logFile.equals(System.err)) {
-            //do not close System.err, just set output to given file
+        if (logFile == null || logFile.equals(System.err)) {
+            //if setting for the first time or if currently outputting
+            //to System.err, just set the new output file
+            out = new PrintWriter(new FileOutputStream(newFile, true), true);
+        } else {
+            //if logfile has been set, close old logfile and set new logfile
+            out.close();
             out = new PrintWriter(new FileOutputStream(newFile, true), true);
         }
-        out.close();
-        out = new PrintWriter(new FileOutputStream(newFile, true), true);
     }
 
 }

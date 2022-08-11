@@ -20,7 +20,7 @@ import java.util.regex.Pattern;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-
+        Logger l = Logger.getInstance();
         Processor processor = setUpProcessor(validateArguments(args));
         UserInterface ui = new UserInterface(processor);
         ui.start();
@@ -136,10 +136,12 @@ public class Main {
             logFile = new File(logFileArg);
             if  (!logFile.exists()) {
                 l.setLogFile(System.err.toString());
-                l.log("Log file new found.");
+                l.log("Log file not found.");
                 throw new FileNotFoundException("Log file not found.");
             } else if (!logFile.canRead()) {
                 throw new AccessDeniedException("Log file cannot be read.");
+            } else {
+                l.setLogFile(logFileArg);
             }
         } else {
             l.setLogFile(System.err.toString());
