@@ -15,9 +15,7 @@ import java.util.*;
 public class Processor {
 
     COVIDReaderCSV covidReader;
-
     COVIDReaderJSON covidReaderJSON;
-
     PropertyReader propertyReader;
     PopulationReader populationReader;
     
@@ -26,9 +24,9 @@ public class Processor {
 
     /*-----Data lists-----*/
 
-    private ArrayList<CovidData> covidDatabase;
-    private ArrayList<PropertyValueData> propertyDatabase;
-    private ArrayList<PopulationData> populationDatabase;
+    private ArrayList<CovidData> covidDatabase = new ArrayList<>();
+    private ArrayList<PropertyValueData> propertyDatabase = new ArrayList<>();
+    private ArrayList<PopulationData> populationDatabase = new ArrayList<>();
 
     /*-----Memoization variables-----*/
 
@@ -55,19 +53,19 @@ public class Processor {
     	List availableDataSet = new ArrayList<>();
     	
     	try { 
-    		if (covidDatabase.size()>=0) {availableDataSet.add("covid");}
+    		if (covidDatabase.size() > 0) {availableDataSet.add("covid");}
     	} catch (Exception e) {
     		; // do nothing and not add to the list
     	}
     	   	
     	try {
-    		if (propertyDatabase.size()>=0) {availableDataSet.add("property");}
+    		if (propertyDatabase.size() > 0) {availableDataSet.add("property");}
     	} catch (Exception e) {
     		; // do nothing and not add to the list
     	}
     	
     	try {
-    		if (populationDatabase.size()>=0) {availableDataSet.add("population");}
+    		if (populationDatabase.size() > 0) {availableDataSet.add("population");}
     	} catch (Exception e) {
     		; // do nothing and not add to the list
     	}

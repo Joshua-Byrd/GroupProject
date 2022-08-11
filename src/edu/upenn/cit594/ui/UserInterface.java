@@ -12,6 +12,10 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.regex.Pattern;
 
+/**
+ * User Interface acts as the point of interaction for the user. Provides methods to start and run the program,
+ * print menus, take in and validate user input, and display desired output retrieved from the processor.
+ */
 public class UserInterface {
     private Set<Integer> zipCodes = new HashSet<>();
     private Processor processor;
@@ -57,33 +61,65 @@ public class UserInterface {
                     return;
                 case ("1"):
                     System.out.println("BEGIN OUTPUT");
-                    for (String set : processor.getAvailableDataSet()) {
-                        System.out.println(set);
+                    //changed this output to reflect the answer for Question#1538 on Ed Discussion
+                    if (processor.getAvailableDataSet().size() > 0) {
+                        for (String set : processor.getAvailableDataSet()) {
+                            System.out.println(set);
+                        }
                     }
-                    if (processor.getAvailableDataSet().size()==0) {System.out.println("No Data Set Is Available");} //Josh I added this for the case no dataset is available
                     System.out.println("END OUTPUT");
                     printMainMenu();
                     break;
                 case ("2"):
-                    System.out.println("BEGIN OUTPUT");
-                    System.out.println(processor.getTotalPopulation());
-                    System.out.println("END OUTPUT");
+                    if (processor.getPopulationDatabase().size() == 0) {
+                        System.out.println("Missing population dataset.");
+                    } else {
+                        System.out.println("BEGIN OUTPUT");
+                        System.out.println(processor.getTotalPopulation());
+                        System.out.println("END OUTPUT");
+                    }
                     printMainMenu();
                     break;
                 case("3"):
-                    runVaccinationStatusSubmenu(scanner);
+                    if (processor.getPopulationDatabase().size() == 0 &&
+                        processor.getCovidDatabase().size() == 0) {
+                        System.out.println("Missing covid dataset and population dataset.");
+                    } else if (processor.getPopulationDatabase().size() == 0) {
+                        System.out.println ("Missing population dataset.");
+                    } else if (processor.getCovidDatabase().size() == 0) {
+                        System.out.println("Missing covid dataset.");
+                    } else {
+                        runVaccinationStatusSubmenu(scanner);
+                    }
                     printMainMenu();
                     break;
                 case("4"):
-                    runAvgMarketValueSubmenu(scanner);
+                    if (processor.getPropertyDatabase().size() == 0) {
+                        System.out.println("Missing property database.");
+                    } else {
+                        runAvgMarketValueSubmenu(scanner);
+                    }
                     printMainMenu();
                     break;
                 case("5"):
-                    runAvgTotLivableAreaSubmenu(scanner);
+                    if (processor.getPropertyDatabase().size() == 0) {
+                        System.out.println("Missing property database.");
+                    } else {
+                        runAvgTotLivableAreaSubmenu(scanner);
+                    }
                     printMainMenu();
                     break;
                 case("6"):
-                    runTotMktValuePerCapitaSubmenu(scanner);
+                    if (processor.getPopulationDatabase().size() == 0 &&
+                            processor.getPropertyDatabase().size() == 0) {
+                        System.out.println("Missing property dataset and population dataset.");
+                    } else if (processor.getPopulationDatabase().size() == 0) {
+                        System.out.println ("Missing population dataset.");
+                    } else if (processor.getPropertyDatabase().size() == 0) {
+                        System.out.println("Missing property dataset.");
+                    } else {
+                        runTotMktValuePerCapitaSubmenu(scanner);
+                    }
                     printMainMenu();
                     break;
                 case("7"):
@@ -92,7 +128,7 @@ public class UserInterface {
                     break;
                 default:
                     System.out.println("That is not a valid menu option. Please select from the menu above.");
-                    System.out.println(" >");
+                    System.out.print(" >");
                     System.out.flush();
 
             }
@@ -115,6 +151,7 @@ public class UserInterface {
         System.out.println("5. Show the average total livable area for properties in a specified ZIP Code");
         System.out.println("6. Show the total market value of properties, per capita, for a specified ZIP Code");
         System.out.println("7. Show the custom feature");
+        System.out.println("Please enter a number from the menu above.");
         System.out.print(" >");
         System.out.flush();
     }
@@ -173,8 +210,12 @@ public class UserInterface {
 
         //print vaccination statuses per ZIP code
         System.out.println("BEGIN OUTPUT");
-        for (Map.Entry<Integer, Double> entry: vaccinationStatuses.entrySet()){
-            System.out.println(entry.getKey() + " " + df.format(entry.getValue()));
+        if (vaccinationStatuses.size() == 0) {
+            System.out.println("0");
+        } else {
+            for (Map.Entry<Integer, Double> entry : vaccinationStatuses.entrySet()) {
+                System.out.println(entry.getKey() + " " + df.format(entry.getValue()));
+            }
         }
         System.out.println("END OUTPUT");
 
@@ -271,18 +312,21 @@ public class UserInterface {
      * Iterates through databases to retrieve all zip codes for validation in other methods.
      */
     public void getAllZipCodes(){
-        for (CovidData c: processor.getCovidDatabase()) {
-            zipCodes.add(c.getZipCode());
+        if (processor.getCovidDatabase().size() != 0) {
+            for (CovidData c : processor.getCovidDatabase()) {
+                zipCodes.add(c.getZipCode());
+            }
         }
-
-        for (PopulationData p: processor.getPopulationDatabase()) {
-            zipCodes.add(p.getZipCode());
+        if (processor.getPopulationDatabase().size() != 0) {
+            for (PopulationData p : processor.getPopulationDatabase()) {
+                zipCodes.add(p.getZipCode());
+            }
         }
     }
 
 
     /**
-     * Checks that the provided zip code is a valid Philadelpia area zip code. How do we do this?
+     * Checks that the provided zip code is a valid Philadelpia area zip code.
      * @param zip code to be checked
      * @return true or false
      */

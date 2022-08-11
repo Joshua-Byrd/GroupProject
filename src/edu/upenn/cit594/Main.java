@@ -28,7 +28,7 @@ public class Main {
 
     /**
      * Takes in the array of arguments from main, validates each and returns a Hashmap, mapping filenames to
-     * File objects, to be used by setUpProcessor.
+     * File objects, to be used by the setUpProcessor() method.
      * @param args an array of String command line arguments
      * @return a map of file names/file objects.
      */
