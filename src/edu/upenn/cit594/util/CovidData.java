@@ -1,7 +1,5 @@
 package edu.upenn.cit594.util;
 
-import java.sql.Timestamp;
-
 
 public class CovidData {
 	

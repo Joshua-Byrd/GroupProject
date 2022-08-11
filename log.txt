@@ -1,0 +1,25 @@
+1660167637845 covid_data_small.csv properties_small.csv population.csv 
+1660167637856 covid_data_small.csv
+1660167637910 population.csv
+1660167637912 properties_small.csv
+1660169762264 covid_data_small.json properties_small.csv population.csv 
+1660169892081 covid_data_small.json properties_small.csv population.csv 
+1660170346530 covid_data_small.json properties_small.csv population.csv 
+1660170744562 covid_data_small.json properties_small.csv population.csv 
+1660170858515 covid_data_small.json properties_small.csv population.csv 
+1660171199824 covid_data_small.json properties_small.csv population.csv 
+1660171288236 covid_data_small.json properties_small.csv population.csv 
+1660172023838 covid_data_small.json properties_small.csv population.csv 
+1660172055033 covid_data_small.json properties_small.csv population.csv 
+1660172152080 covid_data_small.json properties_small.csv population.csv 
+1660172198438 covid_data_small.json properties_small.csv population.csv 
+1660172235397 covid_data_small.json properties_small.csv population.csv 
+1660172235431 population.csv
+1660172235432 properties_small.csv
+1660172264351 partial
+1660172276069 2021-03-25
+1660179998306 covid_data_small.json properties_small.csv population.csv 
+1660179998361 population.csv
+1660179998362 properties_small.csv
+1660180003839 full
+1660180012223 2021-03-25

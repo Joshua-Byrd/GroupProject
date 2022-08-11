@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.simple.parser.ParseException;
+
 public interface Reader<E> {
 
 	List<E> returnRecordsList() throws FileNotFoundException, NumberFormatException, IOException;
