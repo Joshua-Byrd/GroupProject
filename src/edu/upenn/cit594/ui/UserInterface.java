@@ -39,7 +39,7 @@ public class UserInterface {
 
         //set up hashmap of zipcode and population
         processor.setPopulationByZipCode();
-        System.out.println(processor.getPopulationByZipCode().size());
+
         //populate set of zipcodes for validation
         getAllZipCodes();
 
@@ -310,12 +310,7 @@ public class UserInterface {
         System.out.println("BEGIN OUTPUT");
 
         for (Map.Entry<Integer, Double> entry: processor.getDeathsPerCapita().entrySet()) {
-            int avgMktVal = processor.getAvgMarketValue(entry.getKey());
-            //if there are deaths in the zip code and properties in the zip code, print
-            if (entry.getValue() != 0 && avgMktVal != 0) {
-                System.out.println(entry.getKey() + " " + entry.getValue() + " " +
-                        processor.getTotalMarketValue(entry.getKey()));
-            }
+            System.out.println(entry.getKey() + " " + entry.getValue());
         }
         System.out.println("END OUTPUT");
     }

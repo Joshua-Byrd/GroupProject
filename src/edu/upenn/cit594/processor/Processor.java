@@ -269,10 +269,14 @@ public class Processor {
             for (Map.Entry<Integer, Integer> entry: totDeathsPerZipCodeResults.entrySet()) {
                 int zip = entry.getKey();
                 int totalDeaths = entry.getValue();
-                int population = populationByZipCode.get(zip);
-                if (!deathsPerCapitaResults.containsKey(zip)) {
-                    deathsPerCapitaResults.put(zip,
-                            Double.parseDouble(df.format(totalDeaths / populationByZipCode.get(zip))));
+                //only attempt calculation if zip code exists
+                if(populationByZipCode.containsKey(zip)) {
+                    int population = populationByZipCode.get(zip);
+
+                    if (!deathsPerCapitaResults.containsKey(zip)) {
+                        deathsPerCapitaResults.put(zip,
+                                Double.parseDouble(df.format(totalDeaths / populationByZipCode.get(zip))));
+                    }
                 }
             }
         }
@@ -343,6 +347,10 @@ public class Processor {
 
     public Map<Integer, Integer> getPopulationByZipCode() {
         return populationByZipCode;
+    }
+
+    public Map<Integer, Integer> getTotDeathsPerZipCodeResults() {
+        return totDeathsPerZipCodeResults;
     }
 
     /**
