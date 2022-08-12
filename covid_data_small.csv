@@ -1,4 +1,4 @@
-"etl_timestamp","zip_code","NEG","POS","deaths","hospitalized","partially_vaccinated","fully_vaccinated","boosted"
+ "etl_timestamp","zip_code","NEG","POS","deaths","hospitalized","partially_vaccinated","fully_vaccinated","boosted"
 "2021-03-25 17:20:02",19100,7,,,,,,
 "2021-03-25 17:20:02",19101,429,88,,16,,,
 "2021-03-25 17:20:02",19102,9109,335,,9,1185,1145,

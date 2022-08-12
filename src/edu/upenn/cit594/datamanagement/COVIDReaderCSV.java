@@ -38,19 +38,21 @@ public class COVIDReaderCSV implements Reader{
 		
         String buffer = br.readLine();
         String[] lineArray = buffer.split(",", -1);        
-        int zipIndex = 0, partiallyVaccinatedIndex = 0, fullyVaccinatedIndex = 0, timeStampIndex = 0;
+        int zipIndex = 0, partiallyVaccinatedIndex = 0, fullyVaccinatedIndex = 0, timeStampIndex = 0, deathsIndex = 0;
         
         for (int i=0; i<lineArray.length; i++) {
         	if(lineArray[i].equalsIgnoreCase("\"etl_timestamp\"")) {timeStampIndex = i;}
             if(lineArray[i].equalsIgnoreCase("\"zip_code\"")) {zipIndex = i;}
             if(lineArray[i].equalsIgnoreCase("\"partially_vaccinated\"")) {partiallyVaccinatedIndex = i;}
             if(lineArray[i].equalsIgnoreCase("\"fully_vaccinated\"")) {fullyVaccinatedIndex = i;}
+            if(lineArray[i].equalsIgnoreCase("\"deaths\"")) {deathsIndex = i;}
         }
         
         String timeStamp;
         int zipCode;
         int partiallyVaccinated;
         int fullyVaccinated;
+		int deaths;
         
         while((buffer = br.readLine()) != null) { 
 					String[] covidRecordArray = buffer.split(",", -1);
@@ -66,6 +68,12 @@ public class COVIDReaderCSV implements Reader{
 		            } catch(Exception e) {
 		            	zipCode = 0;
 		            }
+
+					try {
+						deaths = Integer.parseInt(covidRecordArray[deathsIndex]);
+					} catch (Exception e) {
+						deaths = 0;
+					}
 				
 			
 				//ignoring the record if the statement below fails
@@ -84,7 +92,7 @@ public class COVIDReaderCSV implements Reader{
 						fullyVaccinated = 0;
 					}
 					
-					CovidData cd = new CovidData(zipCode, timeStamp, partiallyVaccinated, fullyVaccinated);
+					CovidData cd = new CovidData(zipCode, timeStamp, partiallyVaccinated, fullyVaccinated, deaths);
 					
 					objectList.add(cd);
 				

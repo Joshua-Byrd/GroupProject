@@ -24,6 +24,8 @@ public class COVIDReaderJSON<E> implements Reader  {
 	private String timeStamp;
 	private long pvaxx;
 	private long fvaxx;
+
+	private long deaths;
 	
 
 	private Logger l = Logger.getInstance();
@@ -69,8 +71,14 @@ public class COVIDReaderJSON<E> implements Reader  {
 						} catch (Exception e) {
 							fvaxx = 0;
 						}
+
+						try {
+							deaths = (long) obj2.get("deaths");
+						} catch (Exception e){
+							deaths = 0;
+						}
 												
-						CovidData covidData = new CovidData((int)zipCode, timeStamp, (int)pvaxx, (int) fvaxx);
+						CovidData covidData = new CovidData((int)zipCode, timeStamp, (int)pvaxx, (int) fvaxx, (int) deaths);
 						
 						objectList.add(covidData);
 					}

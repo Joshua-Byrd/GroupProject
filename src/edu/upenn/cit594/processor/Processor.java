@@ -37,7 +37,9 @@ public class Processor {
     Map<Integer, Integer> avgTotLivAreaResults = new HashMap<>();
     Map<Integer, Integer> totMktValuePerCapitaResults = new HashMap<>();
     Map<Integer, Integer> customFeatureResults = new HashMap<>();
-
+    Map<Integer, Integer> totDeathsPerZipCodeResults = new TreeMap<>();
+    Map<Integer, Double> deathsPerCapitaResults = new TreeMap<>();
+    Map<Integer, Integer> populationByZipCode = new HashMap<>();
     public Processor(Reader...arr) {}
 
 
@@ -46,11 +48,11 @@ public class Processor {
     /**
      * Returns a list of the datasets that are currently in the program
      *
-     * @return
+     * @return list of datasets
      */
     public List<String> getAvailableDataSet() {
     	
-    	List availableDataSet = new ArrayList<>();
+    	List<String> availableDataSet = new ArrayList<>();
     	
     	try { 
     		if (covidDatabase.size() > 0) {availableDataSet.add("covid");}
@@ -162,7 +164,7 @@ public class Processor {
      * General method that implements the strategy pattern for getAvgMktValue and
      * getTotLivArea operations. Calls the appropriate FieldSum class to get the
      * required sum, then calculates the average of that field for the given zipcode
-     * @param zipCode to calulate the average for
+     * @param zipCode to calculate the average for
      * @param sum the FieldSum class to get the appropriate sum
      * @param memo map to store memoization results
      * @return a truncated int that is the average of the given field in the given zip code
@@ -207,9 +209,9 @@ public class Processor {
     }
 
     /**
-     *
-     * @param zipcode
-     * @return
+     * Returns the total market value per capita of the given zip code
+     * @param zipcode to return results for
+     * @return total market value per capita in truncated int form
      */
     public int getTotalMarketValue(int zipcode) {
 
@@ -247,6 +249,39 @@ public class Processor {
         return totMktValuePerCapitaResults.get(zipcode);
     }
 
+    public Map<Integer, Double> getDeathsPerCapita(){
+
+        //first get total deaths per zip code
+        if (totDeathsPerZipCodeResults.size() == 0) {
+            for (CovidData c: covidDatabase) {
+                //if map contains the zip, update the number of deaths (because deaths are cumulative,
+                //should only increase)
+                if (totDeathsPerZipCodeResults.containsKey(c.getZipCode())) {
+                    totDeathsPerZipCodeResults.replace(c.getZipCode(), c.getDeaths());
+                } else {
+                    totDeathsPerZipCodeResults.put(c.getZipCode(), c.getDeaths());
+                }
+            }
+        }
+
+        //then divide by population of that zip code and store
+        if (deathsPerCapitaResults.size() == 0) {
+            for (Map.Entry<Integer, Integer> entry: totDeathsPerZipCodeResults.entrySet()) {
+                int zip = entry.getKey();
+                int totalDeaths = entry.getValue();
+                int population = populationByZipCode.get(zip);
+                if (!deathsPerCapitaResults.containsKey(zip)) {
+                    deathsPerCapitaResults.put(zip,
+                            Double.parseDouble(df.format(totalDeaths / populationByZipCode.get(zip))));
+                }
+            }
+        }
+
+        return deathsPerCapitaResults;
+    }
+
+
+
     public int getCustomFeature(String input) {
         if (customFeatureResults.containsKey(input)) {
             return customFeatureResults.get(input);
@@ -257,6 +292,8 @@ public class Processor {
             return 0;
         }
     }
+
+
 
     /*----- Getters and Setters -----*/
 
@@ -302,6 +339,21 @@ public class Processor {
 
     public ArrayList<PopulationData> getPopulationDatabase() {
         return populationDatabase;
+    }
+
+    public Map<Integer, Integer> getPopulationByZipCode() {
+        return populationByZipCode;
+    }
+
+    /**
+     * Adds zipcode and population to Hashmap for easy retrieval by other methods
+     */
+    public void setPopulationByZipCode() {
+        for (PopulationData p: populationDatabase) {
+            if (!populationByZipCode.containsKey(p.getZipCode())){
+                populationByZipCode.put(p.getZipCode(), p.getPopulation());
+            }
+        }
     }
 
     public void setUpDatabases() throws IOException {

@@ -9,7 +9,7 @@ public class Logger {
 
     //default log file. If a log file is passed in as a command line argument, logFile
     //gets set with the setLogFile method called in validateArguments in Main.  If no log
-    //file is passed in, an error is logged to System.err
+    //file is passed in, an error is logged to System.err, and an exception is thrown.
     private File logFile = null;
     private PrintWriter out;
 

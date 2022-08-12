@@ -37,6 +37,9 @@ public class UserInterface {
         //and set database variables
         processor.setUpDatabases();
 
+        //set up hashmap of zipcode and population
+        processor.setPopulationByZipCode();
+        System.out.println(processor.getPopulationByZipCode().size());
         //populate set of zipcodes for validation
         getAllZipCodes();
 
@@ -123,11 +126,11 @@ public class UserInterface {
                     printMainMenu();
                     break;
                 case("7"):
-                    System.out.println("Custom Feature");
+                    runCustomFeatureSubmenu();
                     printMainMenu();
                     break;
                 default:
-                    System.out.println("That is not a valid menu option. Please select from the menu above.");
+                    System.out.println("\nThat is not a valid menu option. Please select from the menu above.");
                     System.out.print(" >");
                     System.out.flush();
 
@@ -168,7 +171,7 @@ public class UserInterface {
         DecimalFormat df = new DecimalFormat("#.####");
 
         //prompt for and retrieve vaccination status
-        System.out.println("Would you like the date for full or partial vaccination status?");
+        System.out.println("Would you like the data for full or partial vaccination status?");
         System.out.println("please enter 'full' or 'partial'");
         System.out.print(" >");
         System.out.flush();
@@ -192,7 +195,7 @@ public class UserInterface {
 
         String dateInput = scanner.nextLine();
         while (!isValidDate(dateInput)) {
-            System.out.println("This is not a valid date. Please enter a date is of the form YYYY-MM-DD.");
+            System.out.println("This is not a valid date. Please enter a date in of the form YYYY-MM-DD.");
             System.out.print(" >");
             System.out.flush();
             dateInput = scanner.nextLine();
@@ -236,6 +239,8 @@ public class UserInterface {
 
         while(!isValidZipCode(userInput)){
             System.out.println("That is not a valid zip code. Please enter a valid zip code.");
+            System.out.print(" >");
+            System.out.flush();
             userInput = scanner.nextInt();
         }
 
@@ -261,6 +266,8 @@ public class UserInterface {
 
         while(!isValidZipCode(userInput)){
             System.out.println("That is not a valid zip code. Please enter a valid zip code.");
+            System.out.print(" >");
+            System.out.flush();
             userInput = scanner.nextInt();
         }
 
@@ -286,6 +293,8 @@ public class UserInterface {
 
         while(!isValidZipCode(userInput)){
             System.out.println("That is not a valid zip code. Please enter a valid zip code.");
+            System.out.print(" >");
+            System.out.flush();
             userInput = scanner.nextInt();
         }
 
@@ -294,6 +303,20 @@ public class UserInterface {
 
         System.out.println("BEGIN OUTPUT");
         System.out.println(processor.getTotalMarketValue(userInput));
+        System.out.println("END OUTPUT");
+    }
+
+    public void runCustomFeatureSubmenu() {
+        System.out.println("BEGIN OUTPUT");
+
+        for (Map.Entry<Integer, Double> entry: processor.getDeathsPerCapita().entrySet()) {
+            int avgMktVal = processor.getAvgMarketValue(entry.getKey());
+            //if there are deaths in the zip code and properties in the zip code, print
+            if (entry.getValue() != 0 && avgMktVal != 0) {
+                System.out.println(entry.getKey() + " " + entry.getValue() + " " +
+                        processor.getTotalMarketValue(entry.getKey()));
+            }
+        }
         System.out.println("END OUTPUT");
     }
 

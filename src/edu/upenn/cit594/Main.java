@@ -51,7 +51,6 @@ public class Main {
 
         Map<String, File> fileMap = new HashMap<>();
 
-
         Pattern argsPattern = Pattern.compile("^--(?<name>.+?)=(?<value>.+)$");
 
         for (String arg: args) {

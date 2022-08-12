@@ -8,13 +8,16 @@ public class CovidData {
 	private int partiallyVaccinated;
 	private int fullyVaccinated;
 
+	private int deaths;
+
 	
 	//constructor
-	public CovidData (int zipCode, String timeStamp, int partiallyVaccinated, int fullyVaccinated) {
+	public CovidData (int zipCode, String timeStamp, int partiallyVaccinated, int fullyVaccinated, int deaths) {
 		this.zipCode = zipCode;
 		this.timeStamp = timeStamp;
 		this.partiallyVaccinated = partiallyVaccinated;
 		this.fullyVaccinated = fullyVaccinated;
+		this.deaths = deaths;
 	}
 
 
@@ -33,5 +36,6 @@ public class CovidData {
 	public int getFullyVaccinated() {
 		return fullyVaccinated;
 	}
-	
+	public int getDeaths() { return deaths; }
+
 }
