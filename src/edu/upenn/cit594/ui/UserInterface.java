@@ -308,9 +308,15 @@ public class UserInterface {
 
     public void runCustomFeatureSubmenu() {
         System.out.println("BEGIN OUTPUT");
-
+        System.out.println("Zip   Deaths  Avg Market Value");
         for (Map.Entry<Integer, Double> entry: processor.getDeathsPerCapita().entrySet()) {
-            System.out.println(entry.getKey() + " " + entry.getValue());
+            int zip = entry.getKey();
+            double deathsPerCapita = entry.getValue();
+            int avgMktVal = processor.getAvgMarketValue(zip);
+            if (deathsPerCapita != 0 && avgMktVal != 0) {
+                System.out.println(entry.getKey() + " " + entry.getValue() + " $" +
+                        processor.getAvgMarketValue(entry.getKey()));
+            }
         }
         System.out.println("END OUTPUT");
     }

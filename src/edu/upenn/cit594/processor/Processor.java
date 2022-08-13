@@ -274,13 +274,13 @@ public class Processor {
                     int population = populationByZipCode.get(zip);
 
                     if (!deathsPerCapitaResults.containsKey(zip)) {
+                        double deathsPerCapita = (double)totalDeaths/(double)populationByZipCode.get(zip);
                         deathsPerCapitaResults.put(zip,
-                                Double.parseDouble(df.format(totalDeaths / populationByZipCode.get(zip))));
+                                Double.parseDouble(df.format(deathsPerCapita)));
                     }
                 }
             }
         }
-
         return deathsPerCapitaResults;
     }
 
