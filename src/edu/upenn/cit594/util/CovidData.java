@@ -38,4 +38,9 @@ public class CovidData {
 	}
 	public int getDeaths() { return deaths; }
 
+	public String toString(){
+		return "Timestamp: " + timeStamp + ", Zip: " + zipCode + ", Deaths: " + deaths +
+				", Fully Vaxxed: " + fullyVaccinated + ", Partially Vaxxed: " + partiallyVaccinated;
+	}
+
 }

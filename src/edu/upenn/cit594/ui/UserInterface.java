@@ -44,7 +44,7 @@ public class UserInterface {
         getAllZipCodes();
 
         //run the user interface
-        //runUI(scanner);
+        runUI(scanner);
 
     }
 
@@ -153,7 +153,7 @@ public class UserInterface {
         System.out.println("4. Show the average market value for properties in a specified ZIP Code");
         System.out.println("5. Show the average total livable area for properties in a specified ZIP Code");
         System.out.println("6. Show the total market value of properties, per capita, for a specified ZIP Code");
-        System.out.println("7. Show the custom feature");
+        System.out.println("7. Show deaths per capita versus average market value of properties");
         System.out.println("Please enter a number from the menu above.");
         System.out.print(" >");
         System.out.flush();
@@ -308,13 +308,16 @@ public class UserInterface {
 
     public void runCustomFeatureSubmenu() {
         System.out.println("BEGIN OUTPUT");
-        System.out.println("Zip   Deaths  Avg Market Value");
+        System.out.printf("%12s %19s %15s\n", "Zip Code", "Deaths Per Capita", "Avg Mkt Value");
+        System.out.printf("%12s %19s %15s\n", "************", "*******************", "***************");
         for (Map.Entry<Integer, Double> entry: processor.getDeathsPerCapita().entrySet()) {
             int zip = entry.getKey();
             double deathsPerCapita = entry.getValue();
             int avgMktVal = processor.getAvgMarketValue(zip);
+
+
             if (deathsPerCapita != 0 && avgMktVal != 0) {
-                System.out.println(entry.getKey() + " " + entry.getValue() + " $" +
+                System.out.printf("%12s %19.4f %15s\n", entry.getKey(), entry.getValue(),
                         processor.getAvgMarketValue(entry.getKey()));
             }
         }

@@ -66,9 +66,10 @@ public class COVIDReaderCSV implements Reader{
             }
         }
 
-        for (String s: buffer) {
-            System.out.println(s);
-        }
+//        System.out.println("Headers:");
+//        for (String s: buffer) {
+//            System.out.println(s);
+//        }
         
         String timeStamp;
         int zipCode;
@@ -121,6 +122,12 @@ public class COVIDReaderCSV implements Reader{
 					objectList.add(cd);
 				}
         	}
+
+          //PRINTS FULL LIST OF COVIDDATA OBJECTS FOR TESTING - CAN REMOVE WHEN FINISHED
+//        System.out.println("objectList size = " + objectList.size());
+//        for (CovidData c: objectList){
+//            System.out.println(c);
+//        }
 		
 		
 		return objectList;
