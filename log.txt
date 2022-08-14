@@ -23,3 +23,331 @@
 1660179998362 properties_small.csv
 1660180003839 full
 1660180012223 2021-03-25
+1660421868861 covid_data_small.csv properties_small.csv population.csv 
+1660421868866 covid_data_small.csv
+1660421868900 population.csv
+1660421868901 properties_small.csv
+1660421890182 covid_data_small.csv properties_small.csv population.csv 
+1660421890199 covid_data_small.csv
+1660421890276 population.csv
+1660421890278 properties_small.csv
+1660432329127 covid_data_small.csv properties_small.csv population.csv 
+1660432329140 covid_data_small.csv
+1660432485852 covid_data_small.csv properties_small.csv population.csv 
+1660432485857 covid_data_small.csv
+1660432502773 covid_data_small.csv properties_small.csv population.csv 
+1660432502780 covid_data_small.csv
+1660432665422 covid_data_small.csv properties_small.csv population.csv 
+1660432665428 covid_data_small.csv
+1660432665430 population.csv
+1660432665433 properties_small.csv
+1660432684309 covid_data_small.csv properties_small.csv population.csv 
+1660432684319 covid_data_small.csv
+1660432684321 population.csv
+1660432684323 properties_small.csv
+1660433612267 covid_data_small.csv properties_small.csv population.csv 
+1660433612275 covid_data_small.csv
+1660433673734 covid_data_small.csv properties_small.csv population.csv 
+1660433673744 covid_data_small.csv
+1660433829427 covid_data_small.csv properties_small.csv population.csv 
+1660433829436 covid_data_small.csv
+1660433897176 covid_data_small.csv properties_small.csv population.csv 
+1660433897182 covid_data_small.csv
+1660434135791 covid_data_small.csv properties_small.csv population.csv 
+1660434161338 covid_data_small.csv properties_small.csv population.csv 
+1660434161345 covid_data_small.csv
+1660434243776 covid_data_small.csv properties_small.csv population.csv 
+1660434301842 covid_data_small.csv properties_small.csv population.csv 
+1660434301847 covid_data_small.csv
+1660434465634 covid_data_small.csv properties_small.csv population.csv 
+1660434465643 covid_data_small.csv
+1660434590392 covid_data_small.csv properties_small.csv population.csv 
+1660434590398 covid_data_small.csv
+1660434674268 covid_data_small.csv properties_small.csv population.csv 
+1660434674275 covid_data_small.csv
+1660434692161 covid_data_small.csv properties_small.csv population.csv 
+1660434692168 covid_data_small.csv
+1660434880631 covid_data_small.csv properties_small.csv population.csv 
+1660434880638 covid_data_small.csv
+1660434931276 covid_data_small.csv properties_small.csv population.csv 
+1660434931283 covid_data_small.csv
+1660435101644 covid_data_small.csv properties_small.csv population.csv 
+1660435101651 covid_data_small.csv
+1660435101652 population.csv
+1660435101653 properties_small.csv
+1660435160190 covid_data_small.csv properties_small.csv population.csv 
+1660435160197 covid_data_small.csv
+1660435160199 population.csv
+1660435160201 properties_small.csv
+1660435181258 covid_data_small.csv properties_small.csv population.csv 
+1660435181265 covid_data_small.csv
+1660435181266 population.csv
+1660435181268 properties_small.csv
+1660435239954 covid_data_small.csv properties_small.csv population.csv 
+1660435239963 covid_data_small.csv
+1660435239964 population.csv
+1660435239967 properties_small.csv
+1660435268123 covid_data_small.csv properties_small.csv population.csv 
+1660435336419 covid_data_small.csv properties_small.csv population.csv 
+1660435336428 covid_data_small.csv
+1660435336429 population.csv
+1660435336430 properties_small.csv
+1660435351464 covid_data_small.csv properties_small.csv population.csv 
+1660435351471 covid_data_small.csv
+1660435351472 population.csv
+1660435351473 properties_small.csv
+1660435376381 covid_data_small.csv properties_small.csv population.csv 
+1660435376391 covid_data_small.csv
+1660435376394 population.csv
+1660435376395 properties_small.csv
+1660435385241 covid_data_small.csv properties_small.csv population.csv 
+1660435385247 covid_data_small.csv
+1660435385249 population.csv
+1660435385249 properties_small.csv
+1660435422665 covid_data_small.csv properties_small.csv population.csv 
+1660435422672 covid_data_small.csv
+1660435422676 population.csv
+1660435422677 properties_small.csv
+1660435443829 covid_data_small.csv properties_small.csv population.csv 
+1660435443838 covid_data_small.csv
+1660435443841 population.csv
+1660435443842 properties_small.csv
+1660435480358 covid_data_small.csv properties_small.csv population.csv 
+1660435480363 covid_data_small.csv
+1660435480366 population.csv
+1660435480367 properties_small.csv
+1660435500716 covid_data_small.csv properties_small.csv population.csv 
+1660435500722 covid_data_small.csv
+1660435500725 population.csv
+1660435500726 properties_small.csv
+1660435586880 covid_data_small.csv properties_small.csv population.csv 
+1660435586887 covid_data_small.csv
+1660435608526 covid_data_small.csv properties_small.csv population.csv 
+1660435608535 covid_data_small.csv
+1660435639417 covid_data_small.csv properties_small.csv population.csv 
+1660435639426 covid_data_small.csv
+1660435788853 covid_data_small.csv properties_small.csv population.csv 
+1660435788862 covid_data_small.csv
+1660435788863 population.csv
+1660435788864 properties_small.csv
+1660435807141 covid_data_small.csv properties_small.csv population.csv 
+1660435807148 covid_data_small.csv
+1660435807149 population.csv
+1660435807151 properties_small.csv
+1660435812559 covid_data_small.csv properties_small.csv population.csv 
+1660435812565 covid_data_small.csv
+1660435812567 population.csv
+1660435812569 properties_small.csv
+1660435818358 covid_data_small.csv properties_small.csv population.csv 
+1660435818366 covid_data_small.csv
+1660435818367 population.csv
+1660435818369 properties_small.csv
+1660435914830 covid_data_small.csv properties_small.csv population.csv 
+1660435914838 covid_data_small.csv
+1660435914839 population.csv
+1660435914840 properties_small.csv
+1660435960123 covid_data_small.csv properties_small.csv population.csv 
+1660435960131 covid_data_small.csv
+1660435960133 population.csv
+1660435960134 properties_small.csv
+1660436029797 covid_data_small.csv properties_small.csv population.csv 
+1660436029804 covid_data_small.csv
+1660436029805 population.csv
+1660436029806 properties_small.csv
+1660436065035 covid_data_small.csv properties_small.csv population.csv 
+1660436065043 covid_data_small.csv
+1660436065044 population.csv
+1660436065046 properties_small.csv
+1660436312100 covid_data_small.csv properties_small.csv population.csv 
+1660436312107 covid_data_small.csv
+1660436312109 population.csv
+1660436312110 properties_small.csv
+1660436392292 covid_data_small.csv properties_small.csv population.csv 
+1660436392299 covid_data_small.csv
+1660436392300 population.csv
+1660436392301 properties_small.csv
+1660436465724 covid_data_small.csv properties_small.csv population.csv 
+1660436465732 covid_data_small.csv
+1660436465734 population.csv
+1660436465735 properties_small.csv
+1660436513849 covid_data_small.csv properties_small.csv population.csv 
+1660436513856 covid_data_small.csv
+1660436513858 population.csv
+1660436513859 properties_small.csv
+1660436549206 covid_data_small.csv properties_small.csv population.csv 
+1660436549215 covid_data_small.csv
+1660436549217 population.csv
+1660436549218 properties_small.csv
+1660436565686 covid_data_small.csv properties_small.csv population.csv 
+1660436585738 covid_data_small.csv properties_small.csv population.csv 
+1660436585743 covid_data_small.csv
+1660436585745 population.csv
+1660436585747 properties_small.csv
+1660437022601 covid_data_small.csv properties_small.csv population.csv 
+1660437022607 covid_data_small.csv
+1660437022609 population.csv
+1660437022610 properties_small.csv
+1660437441859 covid_data_small.csv properties_small.csv population.csv 
+1660437441869 covid_data_small.csv
+1660437441871 population.csv
+1660437441872 properties_small.csv
+1660437517746 covid_data_small.csv properties_small.csv population.csv 
+1660437517753 covid_data_small.csv
+1660437517755 population.csv
+1660437517756 properties_small.csv
+1660437639957 covid_data_small.csv properties_small.csv population.csv 
+1660437639966 covid_data_small.csv
+1660437639968 population.csv
+1660437639969 properties_small.csv
+1660437665087 covid_data_small.csv properties_small.csv population.csv 
+1660437665095 covid_data_small.csv
+1660437665098 population.csv
+1660437665099 properties_small.csv
+1660437723177 covid_data_small.csv properties_small.csv population.csv 
+1660437723184 covid_data_small.csv
+1660437723186 population.csv
+1660437723187 properties_small.csv
+1660437754462 covid_data_small.csv properties_small.csv population.csv 
+1660437754470 covid_data_small.csv
+1660437754476 population.csv
+1660437754478 properties_small.csv
+1660437871513 covid_data_small.csv properties_small.csv population.csv 
+1660437871520 covid_data_small.csv
+1660437871522 population.csv
+1660437871525 properties_small.csv
+1660437915040 covid_data_small.csv properties_small.csv population.csv 
+1660437915048 covid_data_small.csv
+1660437915050 population.csv
+1660437915051 properties_small.csv
+1660437978269 covid_data_small.csv properties_small.csv population.csv 
+1660437978276 covid_data_small.csv
+1660437978278 population.csv
+1660437978279 properties_small.csv
+1660438119002 covid_data_small.csv properties_small.csv population.csv 
+1660438119011 covid_data_small.csv
+1660438119013 population.csv
+1660438119014 properties_small.csv
+1660438138315 covid_data_small.csv properties_small.csv population.csv 
+1660438138323 covid_data_small.csv
+1660438138325 population.csv
+1660438138326 properties_small.csv
+1660438150491 covid_data_small.csv properties_small.csv population.csv 
+1660438150499 covid_data_small.csv
+1660438150500 population.csv
+1660438150501 properties_small.csv
+1660438241428 covid_data_small.csv properties_small.csv population.csv 
+1660438241434 covid_data_small.csv
+1660438241436 population.csv
+1660438241437 properties_small.csv
+1660438287538 covid_data_small.csv properties_small.csv population.csv 
+1660438287543 covid_data_small.csv
+1660438287545 population.csv
+1660438287546 properties_small.csv
+1660438302998 covid_data_small.csv properties_small.csv population.csv 
+1660438303005 covid_data_small.csv
+1660438303008 population.csv
+1660438303009 properties_small.csv
+1660438327647 covid_data_small.csv properties_small.csv population.csv 
+1660438327655 covid_data_small.csv
+1660438327657 population.csv
+1660438327658 properties_small.csv
+1660439189352 covid_data_small.csv properties_small.csv population.csv 
+1660439189360 covid_data_small.csv
+1660439189364 population.csv
+1660439189365 properties_small.csv
+1660439268093 covid_data_small.csv properties_small.csv population.csv 
+1660439268101 covid_data_small.csv
+1660439268102 population.csv
+1660439268103 properties_small.csv
+1660439344016 covid_data_small.csv properties_small.csv population.csv 
+1660439344023 covid_data_small.csv
+1660439344024 population.csv
+1660439344025 properties_small.csv
+1660439935210 covid_data_small.csv properties_small.csv population.csv 
+1660439935217 covid_data_small.csv
+1660439973774 covid_data_small.csv properties_small.csv population.csv 
+1660439973781 covid_data_small.csv
+1660439994014 covid_data_small.csv properties_small.csv population.csv 
+1660439994023 covid_data_small.csv
+1660440052028 covid_data_small.csv properties_small.csv population.csv 
+1660440052039 covid_data_small.csv
+1660440065814 covid_data_small.csv properties_small.csv population.csv 
+1660440065820 covid_data_small.csv
+1660440065822 population.csv
+1660440065823 properties_small.csv
+1660440105939 covid_data_small.csv properties_small.csv population.csv 
+1660440105948 covid_data_small.csv
+1660440105950 population.csv
+1660440105952 properties_small.csv
+1660440143870 covid_data_small.csv properties_small.csv population.csv 
+1660440143877 covid_data_small.csv
+1660440143880 population.csv
+1660440143883 properties_small.csv
+1660440152974 covid_data_small.csv properties_small.csv population.csv 
+1660440152980 covid_data_small.csv
+1660440152982 population.csv
+1660440152983 properties_small.csv
+1660440158676 covid_data_small.csv properties_small.csv population.csv 
+1660440158684 covid_data_small.csv
+1660440158685 population.csv
+1660440158686 properties_small.csv
+1660440389953 covid_data_small.csv properties_small.csv population.csv 
+1660440389960 covid_data_small.csv
+1660440389962 population.csv
+1660440389963 properties_small.csv
+1660440423974 covid_data_small.csv properties_small.csv population.csv 
+1660440423981 covid_data_small.csv
+1660440423983 population.csv
+1660440423985 properties_small.csv
+1660440492086 covid_data_small.csv properties_small.csv population.csv 
+1660440492102 covid_data_small.csv
+1660440492102 population.csv
+1660440492105 properties_small.csv
+1660440530397 covid_data_small.csv properties_small.csv population.csv 
+1660440530405 covid_data_small.csv
+1660440530408 population.csv
+1660440530410 properties_small.csv
+1660440554123 covid_data_small.csv properties_small.csv population.csv 
+1660440554134 covid_data_small.csv
+1660440554137 population.csv
+1660440554139 properties_small.csv
+1660440612057 covid_data_small.csv properties_small.csv population.csv 
+1660440612064 covid_data_small.csv
+1660440612067 population.csv
+1660440612069 properties_small.csv
+1660440754299 covid_data_small.csv properties_small.csv population.csv 
+1660440754306 covid_data_small.csv
+1660440754311 population.csv
+1660440754312 properties_small.csv
+1660440823842 covid_data_small.csv properties_small.csv population.csv 
+1660440823849 covid_data_small.csv
+1660440823851 population.csv
+1660440823853 properties_small.csv
+1660440921281 covid_data_small.csv properties_small.csv population.csv 
+1660440921286 covid_data_small.csv
+1660440921289 population.csv
+1660440921291 properties_small.csv
+1660440994720 covid_data_small.csv properties_small.csv population.csv 
+1660440994727 covid_data_small.csv
+1660440994731 population.csv
+1660440994732 properties_small.csv
+1660441181769 covid_data_small.csv properties_small.csv population.csv 
+1660441181778 covid_data_small.csv
+1660441181782 population.csv
+1660441181783 properties_small.csv
+1660441292909 covid_data_small.csv properties_small.csv population.csv 
+1660441292919 covid_data_small.csv
+1660441292926 population.csv
+1660441292927 properties_small.csv
+1660441592453 covid_data_small.csv properties_small.csv population.csv 
+1660441592466 covid_data_small.csv
+1660441592469 population.csv
+1660441592471 properties_small.csv
+1660441607093 covid_data_small.csv properties_small.csv population.csv 
+1660441607099 covid_data_small.csv
+1660441607102 population.csv
+1660441607104 properties_small.csv
+1660441618387 covid_data_small.csv properties_small.csv population.csv 
+1660441618395 covid_data_small.csv
+1660441618396 population.csv
+1660441618397 properties_small.csv

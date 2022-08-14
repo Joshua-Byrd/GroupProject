@@ -44,7 +44,7 @@ public class UserInterface {
         getAllZipCodes();
 
         //run the user interface
-        runUI(scanner);
+        //runUI(scanner);
 
     }
 
