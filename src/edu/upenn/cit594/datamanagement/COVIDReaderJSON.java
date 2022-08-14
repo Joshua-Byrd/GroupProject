@@ -95,6 +95,7 @@ public class COVIDReaderJSON<E> implements Reader  {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
+
 		return objectList;
 		
 	}

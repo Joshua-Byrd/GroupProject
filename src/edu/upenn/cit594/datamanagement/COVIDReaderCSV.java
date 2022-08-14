@@ -66,7 +66,7 @@ public class COVIDReaderCSV implements Reader{
                     try {
                         zipCode = Integer.parseInt(buff[zipIndex]);
                     } catch (Exception e) {
-                        break;
+                        continue;
                     }
                     try {
                         deaths = Integer.parseInt(buff[deathsIndex]);
@@ -76,7 +76,7 @@ public class COVIDReaderCSV implements Reader{
 
 
 				//ignoring the record if the statement below fails
-			if (isTimeStampValidFormat(timeStamp) && buff[zipIndex].length() == 5) {
+			if (isTimeStampValidFormat(timeStamp) && buff[zipIndex].matches("^[0-9]{5}")) {
 
 //				System.out.println("coming here");
 
@@ -97,7 +97,10 @@ public class COVIDReaderCSV implements Reader{
 					objectList.add(cd);
 				}
         	}
-
+		//debugging
+//		for (CovidData o: objectList) {
+//			System.out.println(o);
+//		}
 		return objectList;
 				
        }
@@ -111,10 +114,8 @@ public class COVIDReaderCSV implements Reader{
         format.parse(timeStamp.substring(1, timeStamp.length()-1));
         return true;
     } catch (ParseException e) {
-    	System.out.println("Time Stamp " + timeStamp + " is not valid according to " +
-                format.toPattern() + " pattern.");
- 
-        return false;
+    	return false;
+
     }
  }
 	

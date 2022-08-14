@@ -58,35 +58,35 @@ public class PropertyReader implements Reader {
 			
 				livableArea = buff[livableAreaIndex];
 				
-				zipCode = Integer.parseInt(buff[zipCodeIndex].substring(0, 5));
+				try {
+					zipCode = Integer.parseInt(buff[zipCodeIndex].substring(0, 5));
+				} catch (Exception e) {
+					continue;
+				}
 			
 				PropertyValueData pvd = new PropertyValueData(marketValue, livableArea, zipCode);
 				
 				propertyObjectList.add(pvd);			
 			}
         }
+        
+//        for (PropertyValueData o: propertyObjectList) {
+//        	System.out.println(o.getZipCode());
+//        }
 
 		return propertyObjectList;
 		}
 
 	private boolean isZipCodeValid(String zipCode) {
 		
+		
+		
 		if (zipCode.length() < 5) {
-			//System.out.println("eliminated" + zipCode); //for debugging
 			return false;
 		}
 		
-		String regex = "/(?!^\\d+$)^.+$/g"; //anything other than numerics
-		
-		Pattern p = Pattern.compile(regex, Pattern.CASE_INSENSITIVE);
-		
-		Matcher m = p.matcher(zipCode.substring(0, 5));
-			
-		 if(m.find()) {	//System.out.println("eliminated regex" + zipCode); //debugging
-
-			 return false;}
-		
-		 return true;
-
+		else if (zipCode.matches("^[0-9]{5}")) {
+			return true;
+		} return false;
 	}
 }

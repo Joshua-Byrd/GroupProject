@@ -51,13 +51,13 @@ public class PopulationReader implements Reader {
         
         	while((buff = readRow(br)) != null) { 			
 						
-			if (String.valueOf(buff[zipCodeIndex].substring(0, buff[zipCodeIndex].length())).length() == 5 
+			if (buff[zipCodeIndex].matches("^[0-9]{5}")
 					&& isValidPopulationFigure(buff[populationIndex])) {
 				
 				try {
 					population = Integer.parseInt(buff[populationIndex]); 
 				} catch (Exception e) {
-					population = 0; //if field is empty
+					continue; 
 				}
 			
 				try {
@@ -65,7 +65,7 @@ public class PopulationReader implements Reader {
 					zipCode = Integer.parseInt(zipString);
 
 				} catch (Exception e){
-					break; 
+					continue; 
 				}
 				
 				PopulationData pd = new PopulationData(zipCode, population);
@@ -76,11 +76,6 @@ public class PopulationReader implements Reader {
 		
         	}
         	
-    		//for debugging
-//    		for (PopulationData o: populationObjectList) {
-//    			System.out.println(o.getZipCode());
-//    		}
-    		
 		return populationObjectList;
 	}
 
@@ -92,5 +87,6 @@ public class PopulationReader implements Reader {
 	        return false;
 	    }
 	}
+	
 
 }

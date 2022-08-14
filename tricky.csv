@@ -1,6 +1,6 @@
-Header field 0,""","""","""""",,"",fun, right?","
-Still a header field (2 to be specific"
-0.0,0.1,0.2
-1.0,1.1,1.2
-"2.0, but only because it's zero indexed
-I think",2.1,"""2.2"""
+"etl_timestamp","zip_code","NEG","POS","deaths","hospitalized","partially_vaccinated","fully_vaccinated","boosted"
+"2021-03-25 17:20:02",19100,7,,,,,,
+"2021-03-25 17:20:02",1910,429,88,,16,,,
+"2021-03-25 17:20",19102,9109,335,,9,1185,1145,
+"2021-03-25 17:20:02",19103,43698,1296,39,128,4844,5696,
+"2021-03-25 17:20:02",19104,150126,3529,107,401,8131,4135,

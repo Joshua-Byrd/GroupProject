@@ -31,3 +31,6 @@ java.io.PrintStream@23fc625e
 *.csv
 covid_data_small.json
 log.txt
+population.csv
+properties_small.csv
+population.csv
