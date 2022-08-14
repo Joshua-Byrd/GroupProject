@@ -10,6 +10,7 @@ import edu.upenn.cit594.util.PropertyValueData;
 import java.io.IOException;
 import java.io.Reader;
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.*;
 
 public class Processor {
@@ -18,9 +19,7 @@ public class Processor {
     COVIDReaderJSON covidReaderJSON;
     PropertyReader propertyReader;
     PopulationReader populationReader;
-    
-    private static final DecimalFormat df = new DecimalFormat("0.0000");
-
+   
 
     /*-----Data lists-----*/
 
@@ -111,7 +110,7 @@ public class Processor {
         					
         					perCapita = (double) pvax.getPartiallyVaccinated()/p.getPopulation();	
         					
-        	        		partialVaccinationResults.put(pvax.getZipCode(), Double.parseDouble(df.format(perCapita))); 
+        	        		partialVaccinationResults.put(pvax.getZipCode(), perCapita); 
         	        		//losing the last 2 digits if they are 0. 
         	        		//Need to figure that out
         				}
@@ -144,7 +143,7 @@ public class Processor {
         					
         					perCapita = (double) pvax.getFullyVaccinated()/p.getPopulation();	
         					
-        					fullVaccinationResults.put(pvax.getZipCode(), Double.parseDouble(df.format(perCapita))); 
+        					fullVaccinationResults.put(pvax.getZipCode(), perCapita); 
         	        		//losing the last 2 digits if they are 0. 
         	        		//Need to figure that out
         				}
@@ -275,8 +274,9 @@ public class Processor {
 
                     if (!deathsPerCapitaResults.containsKey(zip)) {
                         double deathsPerCapita = (double)totalDeaths/(double)populationByZipCode.get(zip);
-                        deathsPerCapitaResults.put(zip,
-                                Double.parseDouble(df.format(deathsPerCapita)));
+                        
+						deathsPerCapitaResults.put(zip,
+                                deathsPerCapita);
                     }
                 }
             }

@@ -22,7 +22,7 @@ public class ReaderTests {
     public void testCOVIDReaderCSV() throws IOException {
         Logger l = Logger.getInstance();
         l.setLogFile("log.txt");
-        COVIDReaderCSV covidReader = new COVIDReaderCSV(new File("covid_test_small.csv"));
+        COVIDReaderCSV covidReader = new COVIDReaderCSV(new File("covid_data_small.csv"));
         List<CovidData> covidList = covidReader.returnRecordsList();
 
         //test correct size

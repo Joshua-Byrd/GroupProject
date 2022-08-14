@@ -15,6 +15,7 @@ import edu.upenn.cit594.util.PropertyValueData;
 public class PropertyReader implements Reader {
 	
 	private File fileName;
+	private BufferedReader br;
 
 	private Logger l = Logger.getInstance();
 
@@ -23,54 +24,50 @@ public class PropertyReader implements Reader {
     public PropertyReader(File fileName) throws IOException {
         this.fileName = fileName;
         this.propertyObjectList = new ArrayList<PropertyValueData>();
+        br = new BufferedReader(new FileReader(fileName));
     }
 
 	@Override
 	public List returnRecordsList() throws IOException {
 
-		BufferedReader br = new BufferedReader(new FileReader(fileName));
-
 		//log the file after opening for reading
 		l.log(System.currentTimeMillis() + " " + fileName.getName());
 		
 		//read first line to understand the state of the columns	
-        String buffer = br.readLine();
-        String[] lineArray = buffer.split(",", -1);        
+		String[] buffer = readRow(br);       
         int marketValueIndex = 0, livableAreaIndex = 0, zipCodeIndex = 0;
         
-        for (int i=0; i<lineArray.length; i++) {
+        for (int i=0; i<buffer.length; i++) {
        
-        	if(lineArray[i].equalsIgnoreCase("market_value")) {marketValueIndex = i;}
-            if(lineArray[i].equalsIgnoreCase("total_livable_area")) {livableAreaIndex = i;}
-            if(lineArray[i].equalsIgnoreCase("zip_code")) {zipCodeIndex = i;}
+        	if(buffer[i].equalsIgnoreCase("market_value")) {marketValueIndex = i;}
+            if(buffer[i].equalsIgnoreCase("total_livable_area")) {livableAreaIndex = i;}
+            if(buffer[i].equalsIgnoreCase("zip_code")) {zipCodeIndex = i;}
         }
         
         int zipCode;
         String marketValue; //string because page 5 says the market value and livable area can be non-numeric, and if have to ignore them during calculation but still read them
         String livableArea;
-		
-        while((buffer = br.readLine()) != null) { 
-        	
-			String[] propertyRecordArray = buffer.split(",", -1);
-						
-			if (isZipCodeValid(propertyRecordArray[zipCodeIndex])) {
-
-				marketValue = propertyRecordArray[marketValueIndex]; //include malformed data
-			
-				livableArea = propertyRecordArray[livableAreaIndex];
+        
+        String[] buff;
+		int count = 1;
+        while((buff = readRow(br)) != null) { 
+        	        							
+			if (isZipCodeValid(buff[zipCodeIndex])) {
 				
-				zipCode = Integer.parseInt(propertyRecordArray[zipCodeIndex].substring(0, 5));
+				marketValue = buff[marketValueIndex]; //include malformed data
+			
+				livableArea = buff[livableAreaIndex];
+				
+				zipCode = Integer.parseInt(buff[zipCodeIndex].substring(0, 5));
 			
 				PropertyValueData pvd = new PropertyValueData(marketValue, livableArea, zipCode);
 				
-				propertyObjectList.add(pvd);
-			
+				propertyObjectList.add(pvd);			
 			}
-		
         }
-		
-		return propertyObjectList; //if file is empty
-	}
+
+		return propertyObjectList;
+		}
 
 	private boolean isZipCodeValid(String zipCode) {
 		

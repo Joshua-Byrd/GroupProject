@@ -229,7 +229,7 @@ public class UserInterface {
             System.out.println("0");
         } else {
             for (Map.Entry<Integer, Double> entry : vaccinationStatuses.entrySet()) {
-                System.out.println(entry.getKey() + " " + df.format(entry.getValue()));
+                System.out.printf(entry.getKey() + " " + "%.6s\n", entry.getValue());
             }
         }
         System.out.println("END OUTPUT");

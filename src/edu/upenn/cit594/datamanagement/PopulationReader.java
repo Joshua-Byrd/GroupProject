@@ -9,11 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.upenn.cit594.logging.Logger;
+import edu.upenn.cit594.util.CovidData;
 import edu.upenn.cit594.util.PopulationData;
 
 public class PopulationReader implements Reader {
 	
 	private File fileName;
+    private BufferedReader br;
 
 	private Logger l = Logger.getInstance();
 
@@ -22,52 +24,48 @@ public class PopulationReader implements Reader {
     public PopulationReader(File fileName) throws IOException {
         this.fileName = fileName;
         this.populationObjectList = new ArrayList<PopulationData>();
+        br = new BufferedReader(new FileReader(fileName));
     }
 
 	@Override
 	public List returnRecordsList() throws IOException {
 		
-		BufferedReader br = new BufferedReader(new FileReader(fileName));
-
 		//log the file after opening for reading
 		l.log(System.currentTimeMillis() + " " + fileName.getName());
 		
 		//read first line to understand the state of the columns	
-        String buffer = br.readLine();
-        String[] lineArray = buffer.split(",", -1);        
+		String[] buffer = readRow(br);      
         int populationIndex = 0, zipCodeIndex = 0;
         
-        for (int i=0; i<lineArray.length; i++) {
-        	if(lineArray[i].equalsIgnoreCase("\"population\"")) {populationIndex = i;
-        	}
+        for (int i=0; i<buffer.length; i++) {
+        	if(buffer[i].equalsIgnoreCase("population")) {populationIndex = i;}
         	
-            if(lineArray[i].equalsIgnoreCase("\"zip_code\"")) {zipCodeIndex = i;
-            }
+            if(buffer[i].equalsIgnoreCase("zip_code")) {zipCodeIndex = i;}
         }
- 		
+         		
         int zipCode;
         int population;
         
-        	while((buffer = br.readLine()) != null) { 
-        	
-			String[] populationRecordArray = buffer.split(",", -1);
-			
+        String[] buff;
+        String zipString;
+        
+        	while((buff = readRow(br)) != null) { 			
 						
-			if (String.valueOf(populationRecordArray[zipCodeIndex].subSequence(1, populationRecordArray[zipCodeIndex].length()-1)).length() == 5 
-					&& isValidPopulationFigure(populationRecordArray[populationIndex])) {
-								
+			if (String.valueOf(buff[zipCodeIndex].substring(0, buff[zipCodeIndex].length())).length() == 5 
+					&& isValidPopulationFigure(buff[populationIndex])) {
+				
 				try {
-					population = Integer.parseInt(populationRecordArray[populationIndex]); 
+					population = Integer.parseInt(buff[populationIndex]); 
 				} catch (Exception e) {
 					population = 0; //if field is empty
 				}
 			
 				try {
-					buffer = (String) populationRecordArray[zipCodeIndex].subSequence(1, populationRecordArray[zipCodeIndex].length()-1);
-					zipCode = Integer.parseInt(buffer);
+					zipString = (String) buff[zipCodeIndex].substring(0, buff[zipCodeIndex].length());
+					zipCode = Integer.parseInt(zipString);
 
 				} catch (Exception e){
-					zipCode = 0; 
+					break; 
 				}
 				
 				PopulationData pd = new PopulationData(zipCode, population);
@@ -77,6 +75,12 @@ public class PopulationReader implements Reader {
 			
 		
         	}
+        	
+    		//for debugging
+//    		for (PopulationData o: populationObjectList) {
+//    			System.out.println(o.getZipCode());
+//    		}
+    		
 		return populationObjectList;
 	}
 
