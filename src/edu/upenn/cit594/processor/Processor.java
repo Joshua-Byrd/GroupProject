@@ -39,6 +39,7 @@ public class Processor {
     Map<Integer, Integer> totDeathsPerZipCodeResults = new TreeMap<>();
     Map<Integer, Double> deathsPerCapitaResults = new TreeMap<>();
     Map<Integer, Integer> populationByZipCode = new HashMap<>();
+
     public Processor(Reader...arr) {}
 
 
@@ -193,8 +194,7 @@ public class Processor {
      * @return the average market value of properties in the given zip code
      */
     public int getAvgMarketValue(int zipCode) {
-         return calculateAverage(
-                 zipCode, new MktValSum(), avgMktValueResults);
+         return calculateAverage(zipCode, new MktValSum(), avgMktValueResults);
     }
 
     /**
@@ -219,13 +219,7 @@ public class Processor {
             int population = 0;
             int result;
 
-            //get population for the given zip code
-            for (PopulationData p: populationDatabase) {
-                if (p.getZipCode() == zipcode) {
-                    population = p.getPopulation();
-                    break;
-                }
-            }
+            population = populationByZipCode.get(zipcode);
 
             //get sum of market values
             for (PropertyValueData p: propertyDatabase) {
@@ -237,7 +231,7 @@ public class Processor {
                     try {
                         mktVal = Double.parseDouble(p.getMarketValue());
                         totMktVal += mktVal;
-                    } catch( Exception e) {System.out.println("Could not parse market value.");}
+                    } catch( Exception e) {}
                 }
             }
 
@@ -283,20 +277,6 @@ public class Processor {
         }
         return deathsPerCapitaResults;
     }
-
-
-
-    public int getCustomFeature(String input) {
-        if (customFeatureResults.containsKey(input)) {
-            return customFeatureResults.get(input);
-        } else {
-            //calculate the custom feature and add
-            //to customFeatureResults
-            //return result
-            return 0;
-        }
-    }
-
 
 
     /*----- Getters and Setters -----*/

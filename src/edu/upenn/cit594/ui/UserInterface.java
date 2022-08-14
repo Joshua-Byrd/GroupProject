@@ -207,7 +207,7 @@ public class UserInterface {
 
         String dateInput = scanner.nextLine();
         while (!isValidDate(dateInput)) {
-            System.out.println("This is not a valid date. Please enter a date in of the form YYYY-MM-DD.");
+            System.out.println("This is not a valid date. Please enter a date in the form of YYYY-MM-DD.");
             System.out.print(" >");
             System.out.flush();
             dateInput = scanner.nextLine();
