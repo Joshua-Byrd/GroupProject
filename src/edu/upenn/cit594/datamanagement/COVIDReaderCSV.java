@@ -65,6 +65,10 @@ public class COVIDReaderCSV implements Reader{
             //System.out.println("deaths" + deathsIndex);
             }
         }
+
+        for (String s: buffer) {
+            System.out.println(s);
+        }
         
         String timeStamp;
         int zipCode;
@@ -74,43 +78,55 @@ public class COVIDReaderCSV implements Reader{
         
         String[] buff;
 //        
-//        buff = readRow();
+        buff = readRow();
 //		System.out.println(buff[timeStampIndex]);
 //		System.out.println(buff[2]);
         
-//		while((buff = readRow()) != null) { 
-//		            
-//					timeStamp = buff[timeStampIndex];
+		while((buff = readRow()) != null) {
+
+					timeStamp = buff[timeStampIndex];
 //					System.out.println(timeStamp);
 //					System.out.println(buff[zipIndex]);
-//					zipCode = Integer.parseInt(buff[zipIndex]);
-//					deaths = Integer.parseInt(buff[deathsIndex]);
-//
-//				
-//			
-//				//ignoring the record if the statement below fails
-//			if (isTimeStampValidFormat(timeStamp) && buff[zipIndex].length() == 5) {
-//					
+                    try {
+                        zipCode = Integer.parseInt(buff[zipIndex]);
+                    } catch (Exception e) {
+                        zipCode = 0;
+                    }
+                    try {
+                        deaths = Integer.parseInt(buff[deathsIndex]);
+                    } catch (Exception e) {
+                        deaths = 0;
+                    }
+
+
+				//ignoring the record if the statement below fails
+			if (isTimeStampValidFormat(timeStamp) && buff[zipIndex].length() == 5) {
+
 //				System.out.println("coming here");
-//
-//					partiallyVaccinated = Integer.parseInt(buff[partiallyVaccinatedIndex]);
-//						
-//					fullyVaccinated = Integer.parseInt(buff[fullyVaccinatedIndex]);	
-//					
-//					CovidData cd = new CovidData(zipCode, timeStamp, partiallyVaccinated, fullyVaccinated, deaths);
-//					
-//					objectList.add(cd);				
-//				}
-//        	}
+
+                    try {
+                        partiallyVaccinated = Integer.parseInt(buff[partiallyVaccinatedIndex]);
+                    } catch (Exception e) {
+                        partiallyVaccinated = 0;
+                    }
+
+                    try {
+                        fullyVaccinated = Integer.parseInt(buff[fullyVaccinatedIndex]);
+                    } catch (Exception e) {
+                        fullyVaccinated = 0;
+                    }
+
+					CovidData cd = new CovidData(zipCode, timeStamp, partiallyVaccinated, fullyVaccinated, deaths);
+
+					objectList.add(cd);
+				}
+        	}
 		
 		
 		return objectList;
 				
        }
 
-		
-	
-	
 	public String[] readRow() throws IOException {
 		
         int currentChar = 0;
@@ -126,7 +142,7 @@ public class COVIDReaderCSV implements Reader{
         State state = State.INITIAL;
 
         while (true) {
-        	
+        	if (currentChar == -1) {return null;} //end of file reached
 			currentChar = br.read();
 			
             //check state of the line
@@ -200,13 +216,14 @@ public class COVIDReaderCSV implements Reader{
                         case ('\n'):
                             values.add(stringBuilder.toString());
                             stringBuilder = new StringBuilder();
-                            System.out.println(values);
+//                            System.out.println(values);
                             return values.toArray(new String[values.size()]);
                         case (','):
                         	//System.out.println(stringBuilder.toString());
                         	//System.out.println("size before adding" + values.size());
-                            values.add(stringBuilder.toString());
+
                         	//System.out.println("size of values after adding" + " " + stringBuilder.toString() + " " + values.size());
+                            values.add(stringBuilder.toString());
                             stringBuilder = new StringBuilder();
                             state = State.INITIAL;
                             break;
@@ -214,7 +231,7 @@ public class COVIDReaderCSV implements Reader{
                             state = State.INNER_QUOTE;
                             break;
                     }
-
+                    break;
                 case INNER_QUOTE:
                     switch (currentChar) {
                         case('\r'):
@@ -233,21 +250,17 @@ public class COVIDReaderCSV implements Reader{
                             state = State.QUOTE;
                             break;
                     }
-                    //System.out.println("size of values at breaking" + values.size());
+//                    System.out.println("size of values at breaking" + values.size());
 //                    for (String v: values) {
 //                    	System.out.println(v);
 //                    }
                     
                     break;
             }
-
-          
         }
     }
-		
-	
 
-	private boolean isTimeStampValidFormat(String timeStamp) {
+   	private boolean isTimeStampValidFormat(String timeStamp) {
 
 	SimpleDateFormat format = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     try {
