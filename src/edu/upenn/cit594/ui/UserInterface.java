@@ -126,7 +126,19 @@ public class UserInterface {
                     printMainMenu();
                     break;
                 case("7"):
-                    runCustomFeatureSubmenu();
+                    if (processor.getPopulationDatabase().size() == 0 &&
+                            processor.getPropertyDatabase().size() == 0 &&
+                            processor.getCovidDatabase().size() == 0) {
+                        System.out.println("No available datasets.");
+                    } else if (processor.getPopulationDatabase().size() == 0) {
+                        System.out.println ("Missing population dataset.");
+                    } else if (processor.getPropertyDatabase().size() == 0) {
+                        System.out.println("Missing property dataset.");
+                    } else if (processor.getCovidDatabase().size() == 0){
+                        System.out.println("Missing covide dataset.");
+                    } else {
+                        runCustomFeatureSubmenu();
+                    }
                     printMainMenu();
                     break;
                 default:

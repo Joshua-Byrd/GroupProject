@@ -78,11 +78,7 @@ public class COVIDReaderCSV implements Reader{
 		int deaths;
         
         String[] buff;
-//        
-        buff = readRow();
-//		System.out.println(buff[timeStampIndex]);
-//		System.out.println(buff[2]);
-        
+
 		while((buff = readRow()) != null) {
 
 					timeStamp = buff[timeStampIndex];

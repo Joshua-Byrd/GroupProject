@@ -1,6 +1,7 @@
 package edu.upenn.cit594.test;
 
 import edu.upenn.cit594.datamanagement.COVIDReaderCSV;
+import edu.upenn.cit594.datamanagement.COVIDReaderJSON;
 import edu.upenn.cit594.datamanagement.PopulationReader;
 import edu.upenn.cit594.datamanagement.PropertyReader;
 import edu.upenn.cit594.logging.Logger;
@@ -25,18 +26,33 @@ public class ReaderTests {
         List<CovidData> covidList = covidReader.returnRecordsList();
 
         //test correct size
-        assertEquals(98, covidList.size());
+        assertEquals(99, covidList.size());
 
         //test first record in list - missing the first record in the list
-//        assertEquals(19100, covidList.get(0).getZipCode());
-//        assertEquals(88, covidList.get(0).getDeaths());
+        assertEquals(19100, covidList.get(0).getZipCode());
+        assertEquals(0, covidList.get(0).getDeaths());
 
         //test last record in list
         assertEquals( 19119, covidList.get(covidList.size() - 1).getZipCode());
     }
 
     @Test
-    public void testCOVIDReaderJSON(){
+    public void testCOVIDReaderJSON() throws IOException {
+        Logger l = Logger.getInstance();
+        l.setLogFile("log.txt");
+
+        COVIDReaderJSON covidReaderJSON = new COVIDReaderJSON(new File("covid_data_small.json"));
+        List<CovidData> covidList = covidReaderJSON.returnRecordsList();
+
+        //test first record in list - missing the first record in the list
+        assertEquals(19100, covidList.get(0).getZipCode());
+        assertEquals(0, covidList.get(0).getDeaths());
+
+        //test last record in list
+        assertEquals( 19134, covidList.get(covidList.size() - 1).getZipCode());
+        assertEquals( 59, covidList.get(covidList.size() - 1).getDeaths());
+
+
 
     }
 
