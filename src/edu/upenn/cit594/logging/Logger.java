@@ -10,12 +10,13 @@ public class Logger {
     //default log file. If a log file is passed in as a command line argument, logFile
     //gets set with the setLogFile method called in validateArguments in Main.  If no log
     //file is passed in, an error is logged to System.err, and an exception is thrown.
+	
     private File logFile = null;
-    private PrintWriter out;
+    private PrintWriter logFileWriter;
 
-    private Logger() throws IOException {}
+    private Logger() {};
 
-    private static Logger instance = null;
+    private static Logger instance = new Logger();
 
     /**
      * Returns a new instance of the Logger only if one does not exist. Otherwise, returns the
@@ -23,10 +24,7 @@ public class Logger {
      * @return instance of Logger
      * @throws IOException if file is not found
      */
-    public static Logger getInstance() throws IOException {
-        if (instance == null) {
-            instance = new Logger();
-        }
+    public static Logger getInstance() throws IOException {      
         return instance;
     }
 
@@ -35,8 +33,9 @@ public class Logger {
      * @param msg to be written to the log file
      */
     public void log(String msg){
-        out.println(msg);
-        out.flush();
+    	logFileWriter.println(msg);
+    	logFileWriter.flush();
+               
     }
 
     /**
@@ -45,15 +44,30 @@ public class Logger {
      * @throws IOException if the file cannot be opened
      */
     public void setLogFile(String newFile) throws IOException {
+    	    	
         if (logFile == null) {
             //if setting for the first time or if currently outputting
-            out = new PrintWriter(new FileOutputStream(newFile, true), true);
+        	logFileWriter = new PrintWriter(new FileOutputStream(newFile, true), true);
         } else {
             //if logfile has been set, close old logfile and set new logfile
-            out.close();
-            out = new PrintWriter(new FileOutputStream(newFile, true), true);
+        	logFileWriter.close();
+        	logFileWriter = new PrintWriter(new FileOutputStream(newFile, true), true);
         }
     }
+    
+    public void logErr(String msg) {
+    	logFileWriter.close();
+        System.err.println(msg);
+    }
+    
+    public void closePrevious() {
+    	logFileWriter.flush();
+    	logFileWriter.close();
+    }
 
+	public File getLogFile() {
+		return logFile;
+	}
+    
 }
 

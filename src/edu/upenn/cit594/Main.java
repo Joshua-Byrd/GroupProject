@@ -134,16 +134,20 @@ public class Main {
 
         if (logFileArg != null) {
             logFile = new File(logFileArg);
-            if  (!logFile.exists()) {
-                l.setLogFile(logFileArg);
-            } else if (!logFile.canRead()) {
-                throw new AccessDeniedException("Log file cannot be read.");
-            } else {
-                l.setLogFile(logFileArg);
-            }
-        } else {
-            System.err.println("No log file specified.");
+            l.setLogFile(logFileArg);
+//            if  (!logFile.exists()) {
+//                l.setLogFile(logFileArg);
+//            } else if (!logFile.canRead()) {
+//                throw new AccessDeniedException("Log file cannot be read.");
+//            } else {
+//                l.setLogFile(logFileArg);
         }
+        
+//        } else {           
+////        	l.closePrevious();
+//        	//l.logErr("No log file specified.");
+//        	            
+//        }
 
         return fileMap;
     }
@@ -191,7 +195,11 @@ public class Main {
             argsString.append(f.getName()).append(" ");
         }
 
+        if (l.getLogFile() == null) {
+        	l.logErr(System.currentTimeMillis() + " " + argsString);
+        }  else {
         l.log(System.currentTimeMillis() + " " + argsString);
+        }
     }
 
 

@@ -199,7 +199,12 @@ public class UserInterface {
         }
 
         //log the user's response
+        
+        if (logger.getLogFile() == null) {
+        	logger.logErr(System.currentTimeMillis() + " " + vaccinationResponse);
+        } else {
         logger.log(System.currentTimeMillis() + " " + vaccinationResponse);
+        }
 
         //prompt for and get date to search for
         System.out.println("Please enter a date in the following form: YYYY-MM-DD");
@@ -215,7 +220,11 @@ public class UserInterface {
         }
 
         //log user's response
+        if (logger.getLogFile() == null) {
+        	logger.logErr(System.currentTimeMillis() + " " + dateInput);
+        }  else {
         logger.log(System.currentTimeMillis() + " " + dateInput);
+        }
 
         //get map of vaccination statuses
         if ("full".equals(vaccinationResponse)) {
@@ -262,7 +271,11 @@ public class UserInterface {
         }
 
         //log user's input
+        if (logger.getLogFile() == null) {
+        	logger.logErr(System.currentTimeMillis() + " " + userInput);
+        }  else {
         logger.log(System.currentTimeMillis() + " " + userInput);
+        }
 
         System.out.println("\nBEGIN OUTPUT");
         System.out.println(processor.getAvgMarketValue(userInput));
@@ -290,7 +303,11 @@ public class UserInterface {
         }
 
         //log user's input
+        if (logger.getLogFile() == null) {
+        	logger.logErr(System.currentTimeMillis() + " " + userInput);
+        }  else {
         logger.log(System.currentTimeMillis() + " " + userInput);
+        }
 
         System.out.println("\nBEGIN OUTPUT");
         System.out.println(processor.getAvgTotLivableArea(userInput));
@@ -317,7 +334,11 @@ public class UserInterface {
         }
 
         //log user's input
+        if (logger.getLogFile() == null) {
+        	logger.logErr(System.currentTimeMillis() + " " + userInput);
+        }  else {
         logger.log(System.currentTimeMillis() + " " + userInput);
+        }
 
         System.out.println("\nBEGIN OUTPUT");
         System.out.println(processor.getTotalMarketValue(userInput));
