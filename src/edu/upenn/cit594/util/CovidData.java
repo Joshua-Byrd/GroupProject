@@ -5,14 +5,13 @@ public class CovidData {
 	
 	private int zipCode;
 	private String timeStamp;
-	private int partiallyVaccinated;
-	private int fullyVaccinated;
-
-	private int deaths;
+	private String partiallyVaccinated;
+	private String fullyVaccinated;
+	private String deaths;
 
 	
 	//constructor
-	public CovidData (int zipCode, String timeStamp, int partiallyVaccinated, int fullyVaccinated, int deaths) {
+	public CovidData (int zipCode, String timeStamp, String partiallyVaccinated, String fullyVaccinated, String deaths) {
 		this.zipCode = zipCode;
 		this.timeStamp = timeStamp;
 		this.partiallyVaccinated = partiallyVaccinated;
@@ -29,14 +28,14 @@ public class CovidData {
 		return timeStamp;
 	}
 
-	public int getPartiallyVaccinated() {
+	public String getPartiallyVaccinated() {
 		return partiallyVaccinated;
 	}
 
-	public int getFullyVaccinated() {
+	public String getFullyVaccinated() {
 		return fullyVaccinated;
 	}
-	public int getDeaths() { return deaths; }
+	public String getDeaths() { return deaths; }
 
 	public String toString(){
 		return "Timestamp: " + timeStamp + ", Zip: " + zipCode + ", Deaths: " + deaths +

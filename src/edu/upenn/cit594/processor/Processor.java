@@ -108,12 +108,14 @@ public class Processor {
         			for (PopulationData p: populationDatabase) {
         				if (p.getZipCode() == pvax.getZipCode() && p.getPopulation() != 0) {
         					double perCapita;
-        					
-        					perCapita = (double) pvax.getPartiallyVaccinated()/p.getPopulation();	
-        					
-        	        		partialVaccinationResults.put(pvax.getZipCode(), perCapita); 
-        	        		//losing the last 2 digits if they are 0. 
-        	        		//Need to figure that out
+                            double partiallyVaxxed;
+                            try {
+                                //only put if there is valid vaccination data
+                                partiallyVaxxed = Double.parseDouble(pvax.getPartiallyVaccinated());
+                                perCapita = partiallyVaxxed/p.getPopulation();
+                                partialVaccinationResults.put(pvax.getZipCode(), perCapita);
+                            } catch (Exception e){}
+
         				}
         				
         			}        			        			
@@ -141,12 +143,13 @@ public class Processor {
         			for (PopulationData p: populationDatabase) {
         				if (p.getZipCode() == pvax.getZipCode()) {
         					double perCapita;
-        					
-        					perCapita = (double) pvax.getFullyVaccinated()/p.getPopulation();	
-        					
-        					fullVaccinationResults.put(pvax.getZipCode(), perCapita); 
-        	        		//losing the last 2 digits if they are 0. 
-        	        		//Need to figure that out
+                            double fullyVaxxed;
+                            try {
+                                //only put if there is valid vaccination data
+                                fullyVaxxed = Double.parseDouble(pvax.getPartiallyVaccinated());
+                                perCapita = fullyVaxxed/p.getPopulation();
+                                partialVaccinationResults.put(pvax.getZipCode(), perCapita);
+                            } catch (Exception e){}
         				}
         				
         			}        			        			
@@ -247,13 +250,18 @@ public class Processor {
         //first get total deaths per zip code
         if (totDeathsPerZipCodeResults.size() == 0) {
             for (CovidData c: covidDatabase) {
-                //if map contains the zip, update the number of deaths (because deaths are cumulative,
-                //should only increase)
-                if (totDeathsPerZipCodeResults.containsKey(c.getZipCode())) {
-                    totDeathsPerZipCodeResults.replace(c.getZipCode(), c.getDeaths());
-                } else {
-                    totDeathsPerZipCodeResults.put(c.getZipCode(), c.getDeaths());
-                }
+                //if map contains the zip, try to cast deaths to an int and
+                // update the number of deaths (because deaths are cumulative,
+                //should only increase).
+                int deaths;
+                try{
+                    deaths = Integer.parseInt(c.getDeaths());
+                    if (totDeathsPerZipCodeResults.containsKey(c.getZipCode())) {
+                        totDeathsPerZipCodeResults.replace(c.getZipCode(), deaths);
+                    } else {
+                        totDeathsPerZipCodeResults.put(c.getZipCode(), deaths);
+                    }
+                } catch (Exception e) {}
             }
         }
 

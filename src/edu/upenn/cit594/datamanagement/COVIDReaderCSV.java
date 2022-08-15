@@ -53,9 +53,9 @@ public class COVIDReaderCSV implements Reader{
         
         String timeStamp;
         int zipCode;
-        int partiallyVaccinated;
-        int fullyVaccinated;
-		int deaths;
+        String partiallyVaccinated;
+        String fullyVaccinated;
+		String deaths;
         
         String[] buff;
 
@@ -68,29 +68,19 @@ public class COVIDReaderCSV implements Reader{
                     } catch (Exception e) {
                         continue;
                     }
-                    try {
-                        deaths = Integer.parseInt(buff[deathsIndex]);
-                    } catch (Exception e) {
-                        deaths = 0;
-                    }
+
+                    deaths = buff[deathsIndex];
 
 
 				//ignoring the record if the statement below fails
 			if (isTimeStampValidFormat(timeStamp) && buff[zipIndex].matches("^[0-9]{5}")) {
 
-//				System.out.println("coming here");
 
-                    try {
-                        partiallyVaccinated = Integer.parseInt(buff[partiallyVaccinatedIndex]);
-                    } catch (Exception e) {
-                        partiallyVaccinated = 0;
-                    }
+                     partiallyVaccinated = buff[partiallyVaccinatedIndex];
 
-                    try {
-                        fullyVaccinated = Integer.parseInt(buff[fullyVaccinatedIndex]);
-                    } catch (Exception e) {
-                        fullyVaccinated = 0;
-                    }
+
+                    fullyVaccinated = buff[fullyVaccinatedIndex];
+
 
 					CovidData cd = new CovidData(zipCode, timeStamp, partiallyVaccinated, fullyVaccinated, deaths);
 
@@ -104,8 +94,6 @@ public class COVIDReaderCSV implements Reader{
 		return objectList;
 				
        }
-
-
 
    	private boolean isTimeStampValidFormat(String timeStamp) {
 

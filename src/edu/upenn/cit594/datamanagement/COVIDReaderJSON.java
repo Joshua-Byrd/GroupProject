@@ -22,10 +22,10 @@ public class COVIDReaderJSON<E> implements Reader  {
 	
 	private long zipCode;
 	private String timeStamp;
-	private long pvaxx;
-	private long fvaxx;
+	private String pvaxx;
+	private String fvaxx;
 
-	private long deaths;
+	private String deaths;
 	
 
 	private Logger l = Logger.getInstance();
@@ -59,26 +59,14 @@ public class COVIDReaderJSON<E> implements Reader  {
 					timeStamp = (String) obj2.get("etl_timestamp");
 					
 					if (isTimeStampValidFormat(timeStamp)) {					
-						
-						try {
-							pvaxx = (long) obj2.get("partially_vaccinated"); 
-						} catch (Exception e) {
-							pvaxx = 0;
-						}
-						
-						try {
-							fvaxx = (long) obj2.get("fully_vaccinated");	
-						} catch (Exception e) {
-							fvaxx = 0;
-						}
 
-						try {
-							deaths = (long) obj2.get("deaths");
-						} catch (Exception e){
-							deaths = 0;
-						}
-												
-						CovidData covidData = new CovidData((int)zipCode, timeStamp, (int)pvaxx, (int) fvaxx, (int) deaths);
+						pvaxx = String.valueOf(obj2.get("partially_vaccinated"));
+
+						fvaxx = String.valueOf(obj2.get("fully_vaccinated"));
+
+								deaths = String.valueOf(obj2.get("deaths"));
+
+						CovidData covidData = new CovidData((int)zipCode, timeStamp, pvaxx, fvaxx, deaths);
 						
 						objectList.add(covidData);
 					}
