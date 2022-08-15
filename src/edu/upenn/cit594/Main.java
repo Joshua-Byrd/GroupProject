@@ -20,6 +20,7 @@ import java.util.regex.Pattern;
 public class Main {
 
     public static void main(String[] args) throws IOException {
+
         Logger l = Logger.getInstance();
         Processor processor = setUpProcessor(validateArguments(args));
         UserInterface ui = new UserInterface(processor);
@@ -134,18 +135,14 @@ public class Main {
         if (logFileArg != null) {
             logFile = new File(logFileArg);
             if  (!logFile.exists()) {
-                l.setLogFile(System.err.toString());
-                l.log("Log file not found.");
-                throw new FileNotFoundException("Log file not found.");
+                l.setLogFile(logFileArg);
             } else if (!logFile.canRead()) {
                 throw new AccessDeniedException("Log file cannot be read.");
             } else {
                 l.setLogFile(logFileArg);
             }
         } else {
-            l.setLogFile(System.err.toString());
-            l.log("No log file was passed to command line.");
-            throw new FileNotFoundException("Log file not found.");
+            System.err.println("No log file specified.");
         }
 
         return fileMap;

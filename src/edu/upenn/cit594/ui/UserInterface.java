@@ -63,7 +63,7 @@ public class UserInterface {
                 case ("0"):
                     return;
                 case ("1"):
-                    System.out.println("BEGIN OUTPUT");
+                    System.out.println("\nBEGIN OUTPUT");
                     //changed this output to reflect the answer for Question#1538 on Ed Discussion
                     if (processor.getAvailableDataSet().size() > 0) {
                         for (String set : processor.getAvailableDataSet()) {
@@ -77,7 +77,7 @@ public class UserInterface {
                     if (processor.getPopulationDatabase().size() == 0) {
                         System.out.println("Missing population dataset.");
                     } else {
-                        System.out.println("BEGIN OUTPUT");
+                        System.out.println("\nBEGIN OUTPUT");
                         System.out.println(processor.getTotalPopulation());
                         System.out.println("END OUTPUT");
                     }
@@ -225,7 +225,7 @@ public class UserInterface {
         }
 
         //print vaccination statuses per ZIP code
-        System.out.println("BEGIN OUTPUT");
+        System.out.println("\nBEGIN OUTPUT");
         if (vaccinationStatuses.size() == 0) {
             System.out.println("0");
         } else {
@@ -264,7 +264,7 @@ public class UserInterface {
         //log user's input
         logger.log(System.currentTimeMillis() + " " + userInput);
 
-        System.out.println("BEGIN OUTPUT");
+        System.out.println("\nBEGIN OUTPUT");
         System.out.println(processor.getAvgMarketValue(userInput));
         System.out.flush();
         System.out.println("END OUTPUT");
@@ -292,7 +292,7 @@ public class UserInterface {
         //log user's input
         logger.log(System.currentTimeMillis() + " " + userInput);
 
-        System.out.println("BEGIN OUTPUT");
+        System.out.println("\nBEGIN OUTPUT");
         System.out.println(processor.getAvgTotLivableArea(userInput));
         System.out.println("END OUTPUT");
     }
@@ -319,13 +319,13 @@ public class UserInterface {
         //log user's input
         logger.log(System.currentTimeMillis() + " " + userInput);
 
-        System.out.println("BEGIN OUTPUT");
+        System.out.println("\nBEGIN OUTPUT");
         System.out.println(processor.getTotalMarketValue(userInput));
         System.out.println("END OUTPUT");
     }
 
     public void runCustomFeatureSubmenu() {
-        System.out.println("BEGIN OUTPUT");
+        System.out.println("\nBEGIN OUTPUT");
         System.out.printf("%12s %19s %15s\n", "Zip Code", "Deaths Per Capita", "Avg Mkt Value");
         System.out.printf("%12s %19s %15s\n", "************", "*******************", "***************");
         for (Map.Entry<Integer, Double> entry: processor.getDeathsPerCapita().entrySet()) {

@@ -45,9 +45,8 @@ public class Logger {
      * @throws IOException if the file cannot be opened
      */
     public void setLogFile(String newFile) throws IOException {
-        if (logFile == null || logFile.equals(System.err)) {
+        if (logFile == null) {
             //if setting for the first time or if currently outputting
-            //to System.err, just set the new output file
             out = new PrintWriter(new FileOutputStream(newFile, true), true);
         } else {
             //if logfile has been set, close old logfile and set new logfile

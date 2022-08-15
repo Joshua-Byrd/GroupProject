@@ -197,7 +197,8 @@ public class Processor {
      * @return the average market value of properties in the given zip code
      */
     public int getAvgMarketValue(int zipCode) {
-         return calculateAverage(zipCode, new MktValSum(), avgMktValueResults);
+
+        return calculateAverage(zipCode, new MktValSum(), avgMktValueResults);
     }
 
     /**
