@@ -158,6 +158,7 @@ public class UserInterface {
      * Prints the main menu from which the user chooses their options. All submenus eventually return here.
      */
     public void printMainMenu() {
+        System.out.flush();
         System.out.println("0. Exit the Program");
         System.out.println("1. Show the available data sets");
         System.out.println("2. Show the total population for all ZIP Codes");
@@ -247,13 +248,17 @@ public class UserInterface {
         System.out.println("Please enter a zipcode.");
         System.out.print(" >");
         System.out.flush();
-        int userInput = scanner.nextInt();
+        int userInput = Integer.parseInt(scanner.nextLine());
+        System.out.flush();
+
 
         while(!isValidZipCode(userInput)){
             System.out.println("That is not a valid zip code. Please enter a valid zip code.");
             System.out.print(" >");
             System.out.flush();
-            userInput = scanner.nextInt();
+            userInput = Integer.parseInt(scanner.nextLine());
+            System.out.flush();
+
         }
 
         //log user's input
@@ -261,6 +266,7 @@ public class UserInterface {
 
         System.out.println("BEGIN OUTPUT");
         System.out.println(processor.getAvgMarketValue(userInput));
+        System.out.flush();
         System.out.println("END OUTPUT");
     }
 
@@ -274,13 +280,13 @@ public class UserInterface {
         System.out.println("Please enter a zipcode.");
         System.out.print(" >");
         System.out.flush();
-        int userInput = scanner.nextInt();
+        int userInput = Integer.parseInt(scanner.nextLine());
 
         while(!isValidZipCode(userInput)){
             System.out.println("That is not a valid zip code. Please enter a valid zip code.");
             System.out.print(" >");
             System.out.flush();
-            userInput = scanner.nextInt();
+            userInput = Integer.parseInt(scanner.nextLine());
         }
 
         //log user's input
