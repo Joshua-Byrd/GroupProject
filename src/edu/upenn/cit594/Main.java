@@ -54,7 +54,7 @@ public class Main {
 
         Pattern argsPattern = Pattern.compile("^--(?<name>.+?)=(?<value>.+)$");
 
-        for (String arg: args) {
+        for (String arg : args) {
             Matcher matcher = argsPattern.matcher(arg);
             if (matcher.find()) {
                 //if a matching argument is found, parse into name and value
@@ -62,28 +62,28 @@ public class Main {
                 String argValue = matcher.group("value");
 
                 switch (argName) {
-                    case("covid"):
-                        if(covidFile != null) {
+                    case ("covid"):
+                        if (covidFile != null) {
                             throw new IllegalArgumentException("Covid data file declared twice.");
                         } else {
                             covidFile = argValue;
                         }
                         break;
-                    case("properties"):
-                        if(propFile != null) {
+                    case ("properties"):
+                        if (propFile != null) {
                             throw new IllegalArgumentException("Properties data file declared twice.");
                         } else {
                             propFile = argValue;
                         }
                         break;
-                    case("population"):
-                        if(popFile != null) {
+                    case ("population"):
+                        if (popFile != null) {
                             throw new IllegalArgumentException("Population data file declared twice.");
                         } else {
                             popFile = argValue;
                         }
                         break;
-                    case("log"):
+                    case ("log"):
                         if (logFileArg != null) {
                             throw new IllegalArgumentException("log file declared twice.");
                         } else {
@@ -104,7 +104,7 @@ public class Main {
 
         if (covidFile != null) {
             covidDataFile = new File(covidFile);
-            if  (!covidDataFile.exists()) {
+            if (!covidDataFile.exists()) {
                 throw new FileNotFoundException("Covid file not found.");
             } else if (!covidDataFile.canRead()) {
                 throw new AccessDeniedException("Covid file cannot be read.");
@@ -114,7 +114,7 @@ public class Main {
 
         if (propFile != null) {
             propDataFile = new File(propFile);
-            if  (!propDataFile.exists()) {
+            if (!propDataFile.exists()) {
                 throw new FileNotFoundException("Property file not found.");
             } else if (!propDataFile.canRead()) {
                 throw new AccessDeniedException("Property file cannot be read.");
@@ -124,7 +124,7 @@ public class Main {
 
         if (popFile != null) {
             popDataFile = new File(popFile);
-            if  (!popDataFile.exists()) {
+            if (!popDataFile.exists()) {
                 throw new FileNotFoundException("Population file not found.");
             } else if (!popDataFile.canRead()) {
                 throw new AccessDeniedException("Population file cannot be read.");
@@ -135,21 +135,14 @@ public class Main {
         if (logFileArg != null) {
             logFile = new File(logFileArg);
             l.setLogFile(logFileArg);
-//            if  (!logFile.exists()) {
-//                l.setLogFile(logFileArg);
-//            } else if (!logFile.canRead()) {
-//                throw new AccessDeniedException("Log file cannot be read.");
-//            } else {
-//                l.setLogFile(logFileArg);
+            if (!logFile.canRead()) {
+                throw new AccessDeniedException("Log file cannot be read.");
+            }
+
         }
-        
-//        } else {           
-////        	l.closePrevious();
-//        	//l.logErr("No log file specified.");
-//        	            
-//        }
 
         return fileMap;
+
     }
 
     /**

@@ -57,6 +57,11 @@ public class UserInterface {
         printMainMenu();
 
         String userInput = scanner.nextLine();
+        if (logger.getLogFile() == null) {
+            logger.logErr(System.currentTimeMillis() + " " + userInput);
+        } else {
+            logger.log(System.currentTimeMillis() + " " + userInput);
+        }
 
         while (!"0".equals(userInput)) {
             switch (userInput) {
@@ -149,6 +154,11 @@ public class UserInterface {
             }
 
             userInput = scanner.nextLine();
+            if (logger.getLogFile() == null) {
+                logger.logErr(System.currentTimeMillis() + " " + userInput);
+            } else {
+                logger.log(System.currentTimeMillis() + " " + userInput);
+            }
         }
     }
 
@@ -190,21 +200,26 @@ public class UserInterface {
         System.out.flush();
 
         String vaccinationResponse = scanner.nextLine();
+
+        if (logger.getLogFile() == null) {
+            logger.logErr(System.currentTimeMillis() + " " + vaccinationResponse);
+        } else {
+            logger.log(System.currentTimeMillis() + " " + vaccinationResponse);
+        }
+
         while (!"full".equals(vaccinationResponse) && !"partial".equals(vaccinationResponse)){
             System.out.println("That is not a valid response. Please enter 'full' or 'partial'.");
             System.out.print(" >");
             System.out.flush();
             vaccinationResponse = scanner.nextLine();
+            if (logger.getLogFile() == null) {
+                logger.logErr(System.currentTimeMillis() + " " + vaccinationResponse);
+            } else {
+                logger.log(System.currentTimeMillis() + " " + vaccinationResponse);
+            }
             System.out.flush();
         }
 
-        //log the user's response
-        
-        if (logger.getLogFile() == null) {
-        	logger.logErr(System.currentTimeMillis() + " " + vaccinationResponse);
-        } else {
-        logger.log(System.currentTimeMillis() + " " + vaccinationResponse);
-        }
 
         //prompt for and get date to search for
         System.out.println("Please enter a date in the following form: YYYY-MM-DD");
@@ -212,21 +227,24 @@ public class UserInterface {
         System.out.flush();
 
         String dateInput = scanner.nextLine();
+        if (logger.getLogFile() == null) {
+            logger.logErr(System.currentTimeMillis() + " " + dateInput);
+        } else {
+            logger.log(System.currentTimeMillis() + " " + dateInput);
+        }
         while (!isValidDate(dateInput)) {
             System.out.println("This is not a valid date. Please enter a date in the form of YYYY-MM-DD.");
             System.out.print(" >");
             System.out.flush();
             dateInput = scanner.nextLine();
+            if (logger.getLogFile() == null) {
+                logger.logErr(System.currentTimeMillis() + " " + dateInput);
+            } else {
+                logger.log(System.currentTimeMillis() + " " + dateInput);
+            }
         }
 
-        //log user's response
-        if (logger.getLogFile() == null) {
-        	logger.logErr(System.currentTimeMillis() + " " + dateInput);
-        }  else {
-        logger.log(System.currentTimeMillis() + " " + dateInput);
-        }
-
-        //get map of vaccination statuses
+         //get map of vaccination statuses
         if ("full".equals(vaccinationResponse)) {
             vaccinationStatuses = processor.getFullVaccinationsPerCapita(dateInput);
         } else {
@@ -258,6 +276,11 @@ public class UserInterface {
         System.out.print(" >");
         System.out.flush();
         int userInput = Integer.parseInt(scanner.nextLine());
+        if (logger.getLogFile() == null) {
+            logger.logErr(System.currentTimeMillis() + " " + userInput);
+        } else {
+            logger.log(System.currentTimeMillis() + " " + userInput);
+        }
         System.out.flush();
 
 
@@ -266,16 +289,15 @@ public class UserInterface {
             System.out.print(" >");
             System.out.flush();
             userInput = Integer.parseInt(scanner.nextLine());
+            if (logger.getLogFile() == null) {
+                logger.logErr(System.currentTimeMillis() + " " + userInput);
+            } else {
+                logger.log(System.currentTimeMillis() + " " + userInput);
+            }
             System.out.flush();
 
         }
 
-        //log user's input
-        if (logger.getLogFile() == null) {
-        	logger.logErr(System.currentTimeMillis() + " " + userInput);
-        }  else {
-        logger.log(System.currentTimeMillis() + " " + userInput);
-        }
 
         System.out.println("\nBEGIN OUTPUT");
         System.out.println(processor.getAvgMarketValue(userInput));
@@ -294,19 +316,22 @@ public class UserInterface {
         System.out.print(" >");
         System.out.flush();
         int userInput = Integer.parseInt(scanner.nextLine());
+        if (logger.getLogFile() == null) {
+            logger.logErr(System.currentTimeMillis() + " " + userInput);
+        } else {
+            logger.log(System.currentTimeMillis() + " " + userInput);
+        }
 
         while(!isValidZipCode(userInput)){
             System.out.println("That is not a valid zip code. Please enter a valid zip code.");
             System.out.print(" >");
             System.out.flush();
             userInput = Integer.parseInt(scanner.nextLine());
-        }
-
-        //log user's input
-        if (logger.getLogFile() == null) {
-        	logger.logErr(System.currentTimeMillis() + " " + userInput);
-        }  else {
-        logger.log(System.currentTimeMillis() + " " + userInput);
+            if (logger.getLogFile() == null) {
+                logger.logErr(System.currentTimeMillis() + " " + userInput);
+            } else {
+                logger.log(System.currentTimeMillis() + " " + userInput);
+            }
         }
 
         System.out.println("\nBEGIN OUTPUT");
@@ -325,19 +350,22 @@ public class UserInterface {
         System.out.print(" >");
         System.out.flush();
         int userInput = Integer.parseInt(scanner.nextLine());
+        if (logger.getLogFile() == null) {
+            logger.logErr(System.currentTimeMillis() + " " + userInput);
+        } else {
+            logger.log(System.currentTimeMillis() + " " + userInput);
+        }
 
         while(!isValidZipCode(userInput)){
             System.out.println("That is not a valid zip code. Please enter a valid zip code.");
             System.out.print(" >");
             System.out.flush();
             userInput = Integer.parseInt(scanner.nextLine());
-        }
-
-        //log user's input
-        if (logger.getLogFile() == null) {
-        	logger.logErr(System.currentTimeMillis() + " " + userInput);
-        }  else {
-        logger.log(System.currentTimeMillis() + " " + userInput);
+            if (logger.getLogFile() == null) {
+                logger.logErr(System.currentTimeMillis() + " " + userInput);
+            } else {
+                logger.log(System.currentTimeMillis() + " " + userInput);
+            }
         }
 
         System.out.println("\nBEGIN OUTPUT");

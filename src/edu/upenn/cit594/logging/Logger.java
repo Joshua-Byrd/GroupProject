@@ -46,17 +46,21 @@ public class Logger {
     public void setLogFile(String newFile) throws IOException {
     	    	
         if (logFile == null) {
+            logFile = new File(newFile);
             //if setting for the first time or if currently outputting
-        	logFileWriter = new PrintWriter(new FileOutputStream(newFile, true), true);
+        	logFileWriter = new PrintWriter(new FileOutputStream(logFile, true), true);
         } else {
             //if logfile has been set, close old logfile and set new logfile
         	logFileWriter.close();
-        	logFileWriter = new PrintWriter(new FileOutputStream(newFile, true), true);
+            logFile = new File(newFile);
+        	logFileWriter = new PrintWriter(new FileOutputStream(logFile, true), true);
         }
     }
     
     public void logErr(String msg) {
-    	logFileWriter.close();
+        if (logFileWriter != null) {
+            logFileWriter.close();
+        }
         System.err.println(msg);
     }
     
