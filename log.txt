@@ -872,3 +872,9 @@
 1660521767578 population.csv
 1660521767581 properties_small.csv
 1660521773296 19143
+1660521905417 19143
+1660521972513 covid_data_small.csv properties_small.csv population.csv 
+1660521972534 covid_data_small.csv
+1660521972571 population.csv
+1660521972573 properties_small.csv
+1660521976553 19143

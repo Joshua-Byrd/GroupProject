@@ -307,13 +307,13 @@ public class UserInterface {
         System.out.println("Please enter a zipcode.");
         System.out.print(" >");
         System.out.flush();
-        int userInput = scanner.nextInt();
+        int userInput = Integer.parseInt(scanner.nextLine());
 
         while(!isValidZipCode(userInput)){
             System.out.println("That is not a valid zip code. Please enter a valid zip code.");
             System.out.print(" >");
             System.out.flush();
-            userInput = scanner.nextInt();
+            userInput = Integer.parseInt(scanner.nextLine());
         }
 
         //log user's input
