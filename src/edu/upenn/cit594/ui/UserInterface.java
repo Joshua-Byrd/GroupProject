@@ -275,19 +275,9 @@ public class UserInterface {
         System.out.println("Please enter a zipcode.");
         System.out.print(" >");
         System.out.flush();
-        int userInput = Integer.parseInt(scanner.nextLine());
-        if (logger.getLogFile() == null) {
-            logger.logErr(System.currentTimeMillis() + " " + userInput);
-        } else {
-            logger.log(System.currentTimeMillis() + " " + userInput);
-        }
-        System.out.flush();
 
-
-        while(!isValidZipCode(userInput)){
-            System.out.println("That is not a valid zip code. Please enter a valid zip code.");
-            System.out.print(" >");
-            System.out.flush();
+        int userInput = 0;
+        try{
             userInput = Integer.parseInt(scanner.nextLine());
             if (logger.getLogFile() == null) {
                 logger.logErr(System.currentTimeMillis() + " " + userInput);
@@ -295,7 +285,23 @@ public class UserInterface {
                 logger.log(System.currentTimeMillis() + " " + userInput);
             }
             System.out.flush();
+        } catch (Exception e)
+        {
+        while(!isValidZipCode(userInput)) {
+            System.out.println("That is not a valid zip code. Please enter a valid zip code.");
+            System.out.print(" >");
+            System.out.flush();
 
+            try{
+                userInput = Integer.parseInt(scanner.nextLine());}
+            catch(Exception ex) {}
+            if (logger.getLogFile() == null) {
+                logger.logErr(System.currentTimeMillis() + " " + userInput);
+            } else {
+                logger.log(System.currentTimeMillis() + " " + userInput);
+            }
+            System.out.flush();
+        }
         }
 
 
@@ -315,22 +321,31 @@ public class UserInterface {
         System.out.println("Please enter a zipcode.");
         System.out.print(" >");
         System.out.flush();
-        int userInput = Integer.parseInt(scanner.nextLine());
-        if (logger.getLogFile() == null) {
-            logger.logErr(System.currentTimeMillis() + " " + userInput);
-        } else {
-            logger.log(System.currentTimeMillis() + " " + userInput);
-        }
-
-        while(!isValidZipCode(userInput)){
-            System.out.println("That is not a valid zip code. Please enter a valid zip code.");
-            System.out.print(" >");
-            System.out.flush();
+        int userInput = 0;
+        try{
             userInput = Integer.parseInt(scanner.nextLine());
             if (logger.getLogFile() == null) {
                 logger.logErr(System.currentTimeMillis() + " " + userInput);
             } else {
                 logger.log(System.currentTimeMillis() + " " + userInput);
+            }
+            System.out.flush();
+        } catch (Exception e)
+        {
+            while(!isValidZipCode(userInput)) {
+                System.out.println("That is not a valid zip code. Please enter a valid zip code.");
+                System.out.print(" >");
+                System.out.flush();
+
+                try{
+                    userInput = Integer.parseInt(scanner.nextLine());}
+                catch(Exception ex) {}
+                if (logger.getLogFile() == null) {
+                    logger.logErr(System.currentTimeMillis() + " " + userInput);
+                } else {
+                    logger.log(System.currentTimeMillis() + " " + userInput);
+                }
+                System.out.flush();
             }
         }
 
@@ -349,22 +364,32 @@ public class UserInterface {
         System.out.println("Please enter a zipcode.");
         System.out.print(" >");
         System.out.flush();
-        int userInput = Integer.parseInt(scanner.nextLine());
-        if (logger.getLogFile() == null) {
-            logger.logErr(System.currentTimeMillis() + " " + userInput);
-        } else {
-            logger.log(System.currentTimeMillis() + " " + userInput);
-        }
 
-        while(!isValidZipCode(userInput)){
-            System.out.println("That is not a valid zip code. Please enter a valid zip code.");
-            System.out.print(" >");
-            System.out.flush();
+        int userInput = 0;
+        try{
             userInput = Integer.parseInt(scanner.nextLine());
             if (logger.getLogFile() == null) {
                 logger.logErr(System.currentTimeMillis() + " " + userInput);
             } else {
                 logger.log(System.currentTimeMillis() + " " + userInput);
+            }
+            System.out.flush();
+        } catch (Exception e)
+        {
+            while(!isValidZipCode(userInput)) {
+                System.out.println("That is not a valid zip code. Please enter a valid zip code.");
+                System.out.print(" >");
+                System.out.flush();
+
+                try{
+                    userInput = Integer.parseInt(scanner.nextLine());}
+                catch(Exception ex) {}
+                if (logger.getLogFile() == null) {
+                    logger.logErr(System.currentTimeMillis() + " " + userInput);
+                } else {
+                    logger.log(System.currentTimeMillis() + " " + userInput);
+                }
+                System.out.flush();
             }
         }
 
