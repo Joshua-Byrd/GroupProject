@@ -19,6 +19,8 @@ public class Processor {
     COVIDReaderJSON covidReaderJSON;
     PropertyReader propertyReader;
     PopulationReader populationReader;
+
+    public static int counter;
    
 
     /*-----Data lists-----*/
@@ -189,8 +191,12 @@ public class Processor {
                     count++;
                 }
             }
-            memo.put(zipCode,(int) (newSum/count));
+
+            int average =(int) newSum / (count - counter);
+            memo.put(zipCode,average);
         }
+
+        counter = 0;
 
         return memo.get(zipCode);
 

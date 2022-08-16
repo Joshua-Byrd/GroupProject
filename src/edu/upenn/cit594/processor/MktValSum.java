@@ -16,7 +16,9 @@ public class MktValSum implements FieldSum{
             if(p.getZipCode() == zipCode) {
                 try{
                     sum += Double.parseDouble(p.getMarketValue());
-                } catch (Exception e){}
+                } catch (Exception e){
+                    Processor.counter++;
+                }
             }
         }
 

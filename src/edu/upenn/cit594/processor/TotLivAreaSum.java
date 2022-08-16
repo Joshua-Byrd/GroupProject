@@ -17,7 +17,9 @@ public class TotLivAreaSum implements FieldSum{
             if(p.getZipCode() == zipCode) {
                 try{
                     sum += Double.parseDouble(p.getTotalLivableArea());
-                } catch (Exception e){}
+                } catch (Exception e){
+                    Processor.counter++;
+                }
             }
         }
 
