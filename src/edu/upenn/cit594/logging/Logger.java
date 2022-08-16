@@ -33,9 +33,12 @@ public class Logger {
      * @param msg to be written to the log file
      */
     public void log(String msg){
-    	logFileWriter.println(msg);
-    	logFileWriter.flush();
-               
+    	if (logFile == null) {
+    		System.err.println(msg);
+    	} else {
+    		logFileWriter.println(msg);
+    		logFileWriter.flush();
+    	}
     }
 
     /**
@@ -56,17 +59,11 @@ public class Logger {
         	logFileWriter = new PrintWriter(new FileOutputStream(logFile, true), true);
         }
     }
-    
-    public void logErr(String msg) {
-        if (logFileWriter != null) {
+ 
+    public void closePrevious() {
+        if (logFile != null) {
             logFileWriter.close();
         }
-        System.err.println(msg);
-    }
-    
-    public void closePrevious() {
-    	logFileWriter.flush();
-    	logFileWriter.close();
     }
 
 	public File getLogFile() {

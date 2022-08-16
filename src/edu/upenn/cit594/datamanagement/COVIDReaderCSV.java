@@ -35,12 +35,9 @@ public class COVIDReaderCSV implements Reader{
 	public List returnRecordsList() throws NumberFormatException, IOException, FileNotFoundException  {
 
 		//log the file after opening for reading
-        if (l.getLogFile() == null) {
-            l.logErr(System.currentTimeMillis() + " " + fileName.getName());
-        } else {
-            l.log(System.currentTimeMillis() + " " + fileName.getName());
-        }
-
+        
+          l.log(System.currentTimeMillis() + " " + fileName.getName());
+        
 		//read first line to understand state of the columns		
         String[] buffer = readRow(br);
              

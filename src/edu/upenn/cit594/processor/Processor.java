@@ -112,7 +112,7 @@ public class Processor {
                             try {
                                 //only put if there is valid vaccination data
                                 partiallyVaxxed = Double.parseDouble(pvax.getPartiallyVaccinated());
-                                perCapita = partiallyVaxxed/p.getPopulation();
+                                perCapita = (double) partiallyVaxxed/p.getPopulation();
                                 partialVaccinationResults.put(pvax.getZipCode(), perCapita);
                             } catch (Exception e){}
 
@@ -136,20 +136,26 @@ public class Processor {
      * @return HashMap of ZIP codes/vaccination
      */
     public Map<Integer, Double> getFullVaccinationsPerCapita(String date) {
-        if (fullVaccinationResults.size() == 0) {
+    	
+    	if (fullVaccinationResults.size() == 0) {
 
         	for (CovidData pvax: covidDatabase) {
-        		if (pvax.getTimeStamp().contains(date)) {
+
+        		if (pvax.getTimeStamp().substring(0,10).equals(date)) {		
+        			
         			for (PopulationData p: populationDatabase) {
+        				
         				if (p.getZipCode() == pvax.getZipCode()) {
         					double perCapita;
                             double fullyVaxxed;
                             try {
                                 //only put if there is valid vaccination data
-                                fullyVaxxed = Double.parseDouble(pvax.getPartiallyVaccinated());
-                                perCapita = fullyVaxxed/p.getPopulation();
-                                partialVaccinationResults.put(pvax.getZipCode(), perCapita);
-                            } catch (Exception e){}
+                                fullyVaxxed = Double.parseDouble(pvax.getFullyVaccinated());
+                                perCapita = (double) fullyVaxxed/p.getPopulation();
+                                fullVaccinationResults.put(pvax.getZipCode(), perCapita);
+                            } catch (Exception e){
+                            	continue;
+                            }
         				}
         				
         			}        			        			

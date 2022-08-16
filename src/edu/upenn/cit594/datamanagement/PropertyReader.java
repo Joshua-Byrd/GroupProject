@@ -29,12 +29,9 @@ public class PropertyReader implements Reader {
 
 	@Override
 	public List returnRecordsList() throws IOException {
-		if (l.getLogFile() == null) {
-			l.logErr(System.currentTimeMillis() + " " + fileName.getName());
-		} else {
-			l.log(System.currentTimeMillis() + " " + fileName.getName());
-		}
-
+		
+		l.log(System.currentTimeMillis() + " " + fileName.getName());
+		
 		//read first line to understand the state of the columns	
 		String[] buffer = readRow(br);       
         int marketValueIndex = 0, livableAreaIndex = 0, zipCodeIndex = 0;

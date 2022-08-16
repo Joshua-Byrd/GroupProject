@@ -138,7 +138,6 @@ public class Main {
             if (!logFile.canRead()) {
                 throw new AccessDeniedException("Log file cannot be read.");
             }
-
         }
 
         return fileMap;
@@ -152,8 +151,8 @@ public class Main {
      * @return a new Processor with the given Readers
      */
     public static Processor setUpProcessor(Map<String, File> fileMap) throws IOException {
-        Logger l = Logger.getInstance();
         Processor processor = new Processor();
+        Logger l = Logger.getInstance();
         logCommandLineArgs(fileMap, l);
 
         for(Map.Entry<String, File> e: fileMap.entrySet()) {
@@ -188,16 +187,8 @@ public class Main {
             argsString.append(f.getName()).append(" ");
         }
 
-        if (l.getLogFile() == null) {
-        	l.logErr(System.currentTimeMillis() + " " + argsString);
-        }  else {
         l.log(System.currentTimeMillis() + " " + argsString);
-        }
+     
     }
-
-
-
-
-
 
 }

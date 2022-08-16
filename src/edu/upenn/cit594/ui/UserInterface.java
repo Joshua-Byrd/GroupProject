@@ -57,11 +57,9 @@ public class UserInterface {
         printMainMenu();
 
         String userInput = scanner.nextLine();
-        if (logger.getLogFile() == null) {
-            logger.logErr(System.currentTimeMillis() + " " + userInput);
-        } else {
-            logger.log(System.currentTimeMillis() + " " + userInput);
-        }
+
+        logger.log(System.currentTimeMillis() + " " + userInput);
+
 
         while (!"0".equals(userInput)) {
             switch (userInput) {
@@ -154,11 +152,10 @@ public class UserInterface {
             }
 
             userInput = scanner.nextLine();
-            if (logger.getLogFile() == null) {
-                logger.logErr(System.currentTimeMillis() + " " + userInput);
-            } else {
+
+
                 logger.log(System.currentTimeMillis() + " " + userInput);
-            }
+  
         }
     }
 
@@ -201,22 +198,16 @@ public class UserInterface {
 
         String vaccinationResponse = scanner.nextLine();
 
-        if (logger.getLogFile() == null) {
-            logger.logErr(System.currentTimeMillis() + " " + vaccinationResponse);
-        } else {
-            logger.log(System.currentTimeMillis() + " " + vaccinationResponse);
-        }
+        logger.log(System.currentTimeMillis() + " " + vaccinationResponse);
+
 
         while (!"full".equals(vaccinationResponse) && !"partial".equals(vaccinationResponse)){
             System.out.println("That is not a valid response. Please enter 'full' or 'partial'.");
             System.out.print(" >");
             System.out.flush();
             vaccinationResponse = scanner.nextLine();
-            if (logger.getLogFile() == null) {
-                logger.logErr(System.currentTimeMillis() + " " + vaccinationResponse);
-            } else {
-                logger.log(System.currentTimeMillis() + " " + vaccinationResponse);
-            }
+            logger.log(System.currentTimeMillis() + " " + vaccinationResponse);
+
             System.out.flush();
         }
 
@@ -227,21 +218,15 @@ public class UserInterface {
         System.out.flush();
 
         String dateInput = scanner.nextLine();
-        if (logger.getLogFile() == null) {
-            logger.logErr(System.currentTimeMillis() + " " + dateInput);
-        } else {
-            logger.log(System.currentTimeMillis() + " " + dateInput);
-        }
+        logger.log(System.currentTimeMillis() + " " + dateInput);
+
         while (!isValidDate(dateInput)) {
             System.out.println("This is not a valid date. Please enter a date in the form of YYYY-MM-DD.");
             System.out.print(" >");
             System.out.flush();
             dateInput = scanner.nextLine();
-            if (logger.getLogFile() == null) {
-                logger.logErr(System.currentTimeMillis() + " " + dateInput);
-            } else {
-                logger.log(System.currentTimeMillis() + " " + dateInput);
-            }
+            logger.log(System.currentTimeMillis() + " " + dateInput);
+
         }
 
          //get map of vaccination statuses
@@ -279,11 +264,8 @@ public class UserInterface {
         int userInput = 0;
         try{
             userInput = Integer.parseInt(scanner.nextLine());
-            if (logger.getLogFile() == null) {
-                logger.logErr(System.currentTimeMillis() + " " + userInput);
-            } else {
-                logger.log(System.currentTimeMillis() + " " + userInput);
-            }
+            logger.log(System.currentTimeMillis() + " " + userInput);
+
             System.out.flush();
         } catch (Exception e)
         {
@@ -295,11 +277,8 @@ public class UserInterface {
             try{
                 userInput = Integer.parseInt(scanner.nextLine());}
             catch(Exception ex) {}
-            if (logger.getLogFile() == null) {
-                logger.logErr(System.currentTimeMillis() + " " + userInput);
-            } else {
-                logger.log(System.currentTimeMillis() + " " + userInput);
-            }
+            logger.log(System.currentTimeMillis() + " " + userInput);
+
             System.out.flush();
         }
         }
@@ -324,11 +303,8 @@ public class UserInterface {
         int userInput = 0;
         try{
             userInput = Integer.parseInt(scanner.nextLine());
-            if (logger.getLogFile() == null) {
-                logger.logErr(System.currentTimeMillis() + " " + userInput);
-            } else {
-                logger.log(System.currentTimeMillis() + " " + userInput);
-            }
+            logger.log(System.currentTimeMillis() + " " + userInput);
+
             System.out.flush();
         } catch (Exception e)
         {
@@ -340,11 +316,8 @@ public class UserInterface {
                 try{
                     userInput = Integer.parseInt(scanner.nextLine());}
                 catch(Exception ex) {}
-                if (logger.getLogFile() == null) {
-                    logger.logErr(System.currentTimeMillis() + " " + userInput);
-                } else {
-                    logger.log(System.currentTimeMillis() + " " + userInput);
-                }
+                logger.log(System.currentTimeMillis() + " " + userInput);
+
                 System.out.flush();
             }
         }
@@ -368,11 +341,8 @@ public class UserInterface {
         int userInput = 0;
         try{
             userInput = Integer.parseInt(scanner.nextLine());
-            if (logger.getLogFile() == null) {
-                logger.logErr(System.currentTimeMillis() + " " + userInput);
-            } else {
-                logger.log(System.currentTimeMillis() + " " + userInput);
-            }
+            logger.log(System.currentTimeMillis() + " " + userInput);
+
             System.out.flush();
         } catch (Exception e)
         {
@@ -384,11 +354,7 @@ public class UserInterface {
                 try{
                     userInput = Integer.parseInt(scanner.nextLine());}
                 catch(Exception ex) {}
-                if (logger.getLogFile() == null) {
-                    logger.logErr(System.currentTimeMillis() + " " + userInput);
-                } else {
-                    logger.log(System.currentTimeMillis() + " " + userInput);
-                }
+                logger.log(System.currentTimeMillis() + " " + userInput);
                 System.out.flush();
             }
         }
